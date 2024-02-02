@@ -1,0 +1,124 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{graphicx}
+%\usepackage{fullpage}
+\usepackage{pdfpages}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[font=footnotesize,labelfont=bf]{caption}
+%full name for appendix
+\usepackage[title]{appendix}
+\usepackage{float}
+\usepackage{xspace}
+%\usepackage{parskip}
+%for code
+\usepackage{listings}
+%for math
+\usepackage{amsmath}
+\usepackage{amsfonts}
+%for clever reference
+\usepackage{cleveref}
+\usepackage[noend]{algpseudocode}
+\usepackage[figure,vlined,linesnumbered]{algorithm2e}
+
+
+
+\linespread{1.1}
+\setlength{\parindent}{1.6em}
+\setlength{\emergencystretch}{3em}
+
+\newcommand{\etc}{\textit{etc.}\xspace}
+\newcommand{\ie}{\textit{i.e.}\xspace}
+\newcommand{\eg}{\textit{e.g.}\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Variables
+
+\newcommand{\tx}{\mathrm{TX}}
+\newcommand{\sr}{\mathsf{SR}}
+% \newcommand{\querynum}{\mathrm{q}}
+% \newcommand{\ansnum}{\mathrm{p}}
+\newcommand{\querynum}{10}
+\newcommand{\ansnum}{2}
+
+\newcommand{\chunksize}{256 KB\xspace}
+\newcommand{\sectorsize}{256 B\xspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Project specific macros
+
+\newcommand{\project}{\textsc{Ionian}\xspace}
+
+\newcommand{\token}{{ION}\xspace}
+\newcommand{\tokens}{{ION}s\xspace}
+
+\newcommand{\proof}{{Proof of Random Access}\xspace}
+\newcommand{\sproof}{{PoRA}\xspace}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%opening
+\title{\LARGE \project:
+	\Large a Decentralized Full Storage Stack for Web3.0}
+\author{
+		Ionian Foundation\\
+		\small\href{mailto:ionian@ionian.com}
+			{\nolinkurl{ionian@ionian.com}}
+% 	\and 
+% 		Thaddeus Dryja\\
+% 		\small\href{mailto:rx@awsomnet.org}
+% 			{\nolinkurl{rx@awsomnet.org}}
+	}
+\date{\today\\\small DRAFT Version}
+
+\begin{document}
+
+
+\maketitle
+\flushbottom % Makes all text pages the same height
+
+%--------------------------------------------------------------------
+% ABSTRACT
+%--------------------------------------------------------------------
+
+\input{abstract}
+
+\setcounter{tocdepth}{3}
+
+\tableofcontents % Print the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+
+\newpage
+%--------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%--------------------------------------------------------------------
+
+\input{introduction}
+
+\input{system}
+
+\input{protocol}
+
+\input{mechanism}
+
+\input{kv}
+
+\input{transaction}
+
+\section{Roadmap}
+
+TBA.
+
+%bibliography
+\bibliographystyle{unsrt}
+\bibliography{reference}
+
+
+
+\end{document}

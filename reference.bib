@@ -1,0 +1,956 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+%% Created for Haohui Mai at 2018-05-03 10:49:09 -0700 
+
+
+%% Saved with string encoding Unicode (UTF-8)
+
+@inproceedings{delos,
+	author = {Balakrishnan, Mahesh and Shen, Chen and Jafri, Ahmed and Mapara, Suyog and Geraghty, David and Flinn, Jason and Venkat, Vidhya and Nedelchev, Ivailo and Ghosh, Santosh and Dharamshi, Mihir and Liu, Jingming and Gruszczynski, Filip and Li, Jun and Tibrewal, Rounak and Zaveri, Ali and Nagar, Rajeev and Yossef, Ahmed and Richard, Francois and Song, Yee Jiun},
+	title = {Log-Structured Protocols in Delos},
+	year = {2021},
+	isbn = {9781450387095},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/3477132.3483544},
+	doi = {10.1145/3477132.3483544},
+	abstract = {Developers have access to a wide range of storage APIs and functionality in large-scale systems, such as relational databases, key-value stores, and namespaces. However, this diversity comes at a cost: each API is implemented by a complex distributed system that is difficult to develop and operate. Delos amortizes this cost by enabling different APIs on a shared codebase and operational platform. The primary innovation in Delos is a log-structured protocol: a fine-grained replicated state machine executing above a shared log that can be layered into reusable protocol stacks under different databases. We built and deployed two production databases using Delos at Facebook, creating nine different log-structured protocols in the process. We show via experiments and production data that log-structured protocols impose low overhead, while allowing optimizations that can improve latency by up to 100X (e.g., via leasing) and throughput by up to 2X (e.g., via batching).},
+	booktitle = {Proceedings of the ACM SIGOPS 28th Symposium on Operating Systems Principles},
+	pages = {538–552},
+	numpages = {15},
+	keywords = {Consensus, State Machine Replication},
+	location = {Virtual Event, Germany},
+	series = {SOSP '21}
+}
+
+@article{10.1145/1323293.1294281,
+	author = {DeCandia, Giuseppe and Hastorun, Deniz and Jampani, Madan and Kakulapati, Gunavardhan and Lakshman, Avinash and Pilchin, Alex and Sivasubramanian, Swaminathan and Vosshall, Peter and Vogels, Werner},
+	title = {Dynamo: Amazon's Highly Available Key-Value Store},
+	year = {2007},
+	issue_date = {December 2007},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	volume = {41},
+	number = {6},
+	issn = {0163-5980},
+	url = {https://doi.org/10.1145/1323293.1294281},
+	doi = {10.1145/1323293.1294281},
+	abstract = {Reliability at massive scale is one of the biggest challenges we face at Amazon.com, one of the largest e-commerce operations in the world; even the slightest outage has significant financial consequences and impacts customer trust. The Amazon.com platform, which provides services for many web sites worldwide, is implemented on top of an infrastructure of tens of thousands of servers and network components located in many datacenters around the world. At this scale, small and large components fail continuously and the way persistent state is managed in the face of these failures drives the reliability and scalability of the software systems.This paper presents the design and implementation of Dynamo, a highly available key-value storage system that some of Amazon's core services use to provide an "always-on" experience. To achieve this level of availability, Dynamo sacrifices consistency under certain failure scenarios. It makes extensive use of object versioning and application-assisted conflict resolution in a manner that provides a novel interface for developers to use.},
+	journal = {SIGOPS Oper. Syst. Rev.},
+	month = {oct},
+	pages = {205–220},
+	numpages = {16},
+	keywords = {scalability, performance, reliability}
+}
+
+
+@inproceedings{dynamodb,
+	author = {DeCandia, Giuseppe and Hastorun, Deniz and Jampani, Madan and Kakulapati, Gunavardhan and Lakshman, Avinash and Pilchin, Alex and Sivasubramanian, Swaminathan and Vosshall, Peter and Vogels, Werner},
+	title = {Dynamo: Amazon's Highly Available Key-Value Store},
+	year = {2007},
+	isbn = {9781595935915},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/1294261.1294281},
+	doi = {10.1145/1294261.1294281},
+	abstract = {Reliability at massive scale is one of the biggest challenges we face at Amazon.com, one of the largest e-commerce operations in the world; even the slightest outage has significant financial consequences and impacts customer trust. The Amazon.com platform, which provides services for many web sites worldwide, is implemented on top of an infrastructure of tens of thousands of servers and network components located in many datacenters around the world. At this scale, small and large components fail continuously and the way persistent state is managed in the face of these failures drives the reliability and scalability of the software systems.This paper presents the design and implementation of Dynamo, a highly available key-value storage system that some of Amazon's core services use to provide an "always-on" experience. To achieve this level of availability, Dynamo sacrifices consistency under certain failure scenarios. It makes extensive use of object versioning and application-assisted conflict resolution in a manner that provides a novel interface for developers to use.},
+	booktitle = {Proceedings of Twenty-First ACM SIGOPS Symposium on Operating Systems Principles},
+	pages = {205–220},
+	numpages = {16},
+	keywords = {performance, reliability, scalability},
+	location = {Stevenson, Washington, USA},
+	series = {SOSP '07}
+} 
+
+@inproceedings{cassandra,
+	title={Cassandra: structured storage system on a P2P network},
+	author={Avinash Lakshman and Prashant Malik},
+	booktitle={PODC '09},
+	year={2009}
+}
+
+@inproceedings{tango,
+	author = {Balakrishnan, Mahesh and Malkhi, Dahlia and Wobber, Ted and Wu, Ming and Prabhakaran, Vijayan and Wei, Michael and Davis, John D. and Rao, Sriram and Zou, Tao and Zuck, Aviad},
+	title = {Tango: Distributed Data Structures over a Shared Log},
+	year = {2013},
+	isbn = {9781450323888},
+	publisher = {Association for Computing Machinery},
+	address = {New York, NY, USA},
+	url = {https://doi.org/10.1145/2517349.2522732},
+	doi = {10.1145/2517349.2522732},
+	abstract = {Distributed systems are easier to build than ever with the emergence of new, data-centric abstractions for storing and computing over massive datasets. However, similar abstractions do not exist for storing and accessing meta-data. To fill this gap, Tango provides developers with the abstraction of a replicated, in-memory data structure (such as a map or a tree) backed by a shared log. Tango objects are easy to build and use, replicating state via simple append and read operations on the shared log instead of complex distributed protocols; in the process, they obtain properties such as linearizability, persistence and high availability from the shared log. Tango also leverages the shared log to enable fast transactions across different objects, allowing applications to partition state across machines and scale to the limits of the underlying log without sacrificing consistency.},
+	booktitle = {Proceedings of the Twenty-Fourth ACM Symposium on Operating Systems Principles},
+	pages = {325–340},
+	numpages = {16},
+	location = {Farminton, Pennsylvania},
+	series = {SOSP '13}
+}
+
+@inproceedings {corfu,
+	author = {Mahesh Balakrishnan and Dahlia Malkhi and Vijayan Prabhakaran and Ted Wobbler and Michael Wei and John D. Davis},
+	title = { {CORFU}: A Shared Log Design for Flash Clusters},
+	booktitle = {9th USENIX Symposium on Networked Systems Design and Implementation (NSDI 12)},
+	year = {2012},
+	isbn = {978-931971-92-8},
+	address = {San Jose, CA},
+	pages = {1--14},
+	url = {https://www.usenix.org/conference/nsdi12/technical-sessions/presentation/balakrishnan},
+	publisher = {USENIX Association},
+	month = apr,
+}
+
+@inproceedings{tensorflow,
+	title	= {TensorFlow: A system for large-scale machine learning},
+	author	= {Martin Abadi and Paul Barham and Jianmin Chen and Zhifeng Chen and Andy Davis and Jeffrey Dean and Matthieu Devin and Sanjay Ghemawat and Geoffrey Irving and Michael Isard and Manjunath Kudlur and Josh Levenberg and Rajat Monga and Sherry Moore and Derek G. Murray and Benoit Steiner and Paul Tucker and Vijay Vasudevan and Pete Warden and Martin Wicke and Yuan Yu and Xiaoqiang Zheng},
+	year	= {2016},
+	URL	= {https://www.usenix.org/system/files/conference/osdi16/osdi16-abadi.pdf},
+	booktitle	= {12th USENIX Symposium on Operating Systems Design and Implementation (OSDI 16)},
+	pages	= {265--283}
+}
+
+@inproceedings{mapreduce,
+	title	= {MapReduce: Simplified Data Processing on Large Clusters},
+	author	= {Jeffrey Dean and Sanjay Ghemawat},
+	year	= {2004},
+	booktitle	= {OSDI'04: Sixth Symposium on Operating System Design and Implementation},
+	pages	= {137--150},
+	address	= {San Francisco, CA}
+}
+
+@inproceedings {spanner,
+	author = {James C. Corbett and Jeffrey Dean and Michael Epstein and Andrew Fikes and Christopher Frost and JJ Furman and Sanjay Ghemawat and Andrey Gubarev and Christopher Heiser and Peter Hochschild and Wilson Hsieh and Sebastian Kanthak and Eugene Kogan and Hongyi Li and Alexander Lloyd and Sergey Melnik and David Mwaura and David Nagle and Sean Quinlan and Rajesh Rao and Lindsay Rolig and Yasushi Saito and Michal Szymaniak and Christopher Taylor and Ruth Wang and Dale Woodford},
+	title = {Spanner: {Google{\textquoteright}s} {Globally-Distributed} Database},
+	booktitle = {10th USENIX Symposium on Operating Systems Design and Implementation (OSDI 12)},
+	year = {2012},
+	isbn = {978-1-931971-96-6},
+	address = {Hollywood, CA},
+	pages = {261--264},
+	url = {https://www.usenix.org/conference/osdi12/technical-sessions/presentation/corbett},
+	publisher = {USENIX Association},
+	month = oct,
+}
+
+@inproceedings{megastore,
+	title	= {Megastore: Providing Scalable, Highly Available Storage for Interactive Services},
+	author	= {Jason Baker and Chris Bond and James C. Corbett and JJ Furman and Andrey Khorlin and James Larson and Jean-Michel Leon and Yawei Li and Alexander Lloyd and Vadim Yushprakh},
+	year	= {2011},
+	URL	= {http://www.cidrdb.org/cidr2011/Papers/CIDR11_Paper32.pdf},
+	booktitle	= {Proceedings of the Conference on Innovative Data system Research (CIDR)},
+	pages	= {223--234}
+}
+
+@inproceedings{bigtable,
+	title	= {Bigtable: A Distributed Storage System for Structured Data},
+	author	= {Fay Chang and Jeffrey Dean and Sanjay Ghemawat and Wilson C. Hsieh and Deborah A. Wallach and Mike Burrows and Tushar Chandra and Andrew Fikes and Robert E. Gruber},
+	year	= {2006},
+	booktitle	= {7th {USENIX} Symposium on Operating Systems Design and Implementation (OSDI)},
+	pages	= {205--218}
+}
+
+@InProceedings{pinsketch,
+author="Dodis, Yevgeniy
+and Reyzin, Leonid
+and Smith, Adam",
+editor="Cachin, Christian
+and Camenisch, Jan L.",
+title="Fuzzy Extractors: How to Generate Strong Keys from Biometrics and Other Noisy Data",
+booktitle="Advances in Cryptology - EUROCRYPT 2004",
+year="2004",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="523--540",
+abstract="We provide formal definitions and efficient secure techniques for turning biometric information into keys usable for any cryptographic application, andreliably and securely authenticating biometric data.",
+isbn="978-3-540-24676-3"
+}
+
+@inproceedings{timing-attack,
+  author = {Neudecker, Till and Andelfinger, Philipp and Hartenstein, Hannes},
+  booktitle = {2016 International IEEE Conference on Advanced and Trusted Computing (ATC)},
+  title = {{Timing Analysis for Inferring the Topology of the Bitcoin Peer-to-Peer Network}},
+  year = {2016},
+  volume = {},
+  number = {},
+  pages = {358-367},
+  doi = {10.1109/UIC-ATC-ScalCom-CBDCom-IoP-SmartWorld.2016.0070},
+  month = {July},
+  note = {Received Best Paper Award}
+}
+
+@article{VaultFB,
+  title={Vault: Fast Bootstrapping for Cryptocurrencies},
+  author={Derek Leung and Adam Suhl and Yossi Gilad and Nickolai Zeldovich},
+  journal={IACR Cryptology ePrint Archive},
+  year={2018},
+  volume={2018},
+  pages={269}
+}
+
+@inproceedings{merkle,
+  title={A digital signature based on a conventional encryption function},
+  author={Merkle, Ralph C},
+  booktitle={Conference on the theory and application of cryptographic techniques},
+  pages={369--378},
+  year={1987},
+  organization={Springer}
+}
+
+@article{scalempt,
+  title={Scalable and Efficient Data Authentication for Decentralized Systems},
+  author={Ponnapalli, Soujanya and Shah, Aashaka and Tai, Amy and Banerjee, Souvik and Chidambaram, Vijay and Malkhi, Dahlia and Wei, Michael},
+  journal={arXiv preprint arXiv:1909.11590},
+  year={2019}
+}
+
+@article{erdos,
+  title={On Random Graphs. I},
+  author={Erdős, P. and Rényi, A.},
+  journal={Publicationes Mathematicae},
+  volume={6},
+  pages={290-197},
+  year={1959}
+}
+
+@article{sha3,
+  title={SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions},
+  author={Dworkin, Morris J.},
+  journal={Federal Inf. Process. STDS. (NIST FIPS) },  
+  year={2015}
+}
+
+@article{giant,
+  title={The Evolution of Random Graphs—the Giant Component.},
+  author={Bollobás, B.},
+  journal={Random Graphs (Cambridge Studies in Advanced Mathematics)},  
+  pages={130-159},
+  year={2001}
+}
+
+@article{kiayias2015speed,
+  title={Speed-Security Tradeoffs in Blockchain Protocols.},
+  author={Kiayias, Aggelos and Panagiotakos, Giorgos},
+  journal={IACR Cryptology ePrint Archive},
+  volume={2015},
+  pages={1019},
+  year={2015}
+}
+
+@article{refund,
+  title={Refund attacks on Bitcoin’s Payment Protocol.},
+  author={Patrick McCorry and Siamak F. Shahandashti and Feng Hao},
+  journal={IACR Cryptology ePrint Archive},
+  volume={2016},  
+  year={2016}
+}
+
+@inproceedings{Malleability,
+  title={On the Malleability of Bitcoin Transactions.},
+  author={Marcin Andrychowicz and Stefan Dziembowski and Daniel Malinowski and Lukasz Mazurek},
+  booktitle={Financial Cryptography and Data Security},    
+  year={2015}
+}
+
+@inproceedings{pool-attack,
+  title={Game-Theoretic Analysis of DDoS Attacks Against Bitcoin Mining Pools.},
+  author={Benjamin Johnson and Aron Laszka and Jens Grossklags and Marie Vasek and Tyler Moore},
+  booktitle={Financial Cryptography and Data Security},    
+  year={2014}
+}
+
+@inproceedings{Anonymity,
+  title={An Analysis of Anonymity in Bitcoin Using P2P Network Traffic.},
+  author={Philip Koshy and Diana Koshy and Patrick McDaniel},
+  booktitle={Financial Cryptography and Data Security},    
+  year={2014}
+}
+
+@inproceedings{Li:2005,
+ author = {Li, Jinyang and Stribling, Jeremy and Morris, Robert and Kaashoek, M. Frans},
+ title = {Bandwidth-efficient Management of DHT Routing Tables},
+ booktitle = {Proceedings of the 2Nd Conference on Symposium on Networked Systems Design \& Implementation - Volume 2},
+ series = {NSDI'05},
+ year = {2005},
+ pages = {99--114},
+ numpages = {16},
+ url = {http://dl.acm.org/citation.cfm?id=1251203.1251211},
+ acmid = {1251211},
+ publisher = {USENIX Association},
+ address = {Berkeley, CA, USA},
+} 
+
+@INPROCEEDINGS{Kumar,
+author={P. {Kumar} and G. {Sridhar} and V. {Sridhar}},
+booktitle={2005 Systems Communications (ICW'05, ICHSN'05, ICMCS'05, SENET'05)},
+title={Bandwidth and latency model for DHT based peer-to-peer networks under variable churn},
+year={2005},
+volume={},
+number={},
+pages={320-325},
+keywords={telecommunication network routing;Internet;peer-to-peer computing;bandwidth model;latency model;DHT based peer-to-peer networks;churn;distributed hash table;routing performance;network traffic;P2P system;nonuniform node bandwidth;flash crowd requests;node liveness;Bandwidth;Delay;Peer to peer computing;Routing;Internet;Fault tolerance;Data structures;Distributed computing;Innovation management;Telecommunication traffic},
+doi={10.1109/ICW.2005.31},
+ISSN={},
+month={Aug},}
+
+@article{MtGox,
+  author    = {Christian Decker and Roger Wattenhofer},
+  title     = {Bitcoin Transaction Malleability and MtGox},
+  journal   = {CoRR},
+  volume    = {abs/1403.6676},
+  year      = {2014},
+  url       = {http://arxiv.org/abs/1403.6676},
+  archivePrefix = {arXiv},
+  eprint    = {1403.6676},
+  timestamp = {Mon, 13 Aug 2018 16:46:59 +0200},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/DeckerW14},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{bribery,
+title = {Why buy when you can rent? Bribery attacks on bitcoin-style consensus},
+author = {Joseph Bonneau},
+year = {2016},
+volume = {9604 LNCS},
+series = {Lecture Notes in Computer Science (including subseries Lecture Notes in Artificial Intelligence and Lecture Notes in Bioinformatics)},
+publisher = {Springer Verlag},
+pages = {19--26},
+booktitle = {Financial Cryptography and Data Security - International Workshops, FC 2016, BITCOIN, VOTING, and WAHC, Revised Selected Papers},
+address = {Germany},
+}
+
+@inproceedings{Freenet,
+ author = {Clarke, Ian and Sandberg, Oskar and Wiley, Brandon and Hong, Theodore W.},
+ title = {Freenet: A Distributed Anonymous Information Storage and Retrieval System},
+ booktitle = {International Workshop on Designing Privacy Enhancing Technologies: Design Issues in Anonymity and Unobservability},
+ year = {2001},
+ isbn = {3-540-41724-9},
+ location = {Berkeley, California, USA},
+ pages = {46--66},
+ numpages = {21},
+ url = {http://dl.acm.org/citation.cfm?id=371931.371977},
+ acmid = {371977},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+} 
+
+
+@INPROCEEDINGS{Efa,
+author={S. {Vuong} and J. {Li}},
+booktitle={Proceedings Third International Conference on Peer-to-Peer Computing (P2P2003)},
+title={Efa: an efficient content routing algorithm in large peer-to-peer overlay networks},
+year={2003},
+volume={},
+number={},
+pages={216-217},
+keywords={telecommunication network routing;distributed processing;routing protocols;broadcasting;telecommunication congestion control;Internet;Efa algorithm;content routing algorithm;peer-to-peer overlay network;constrained flooding routing algorithm;application level broadcasting;Internet;decentralized self-organizing network;topology information;Routing;Intelligent networks;Peer to peer computing;Floods;Broadcasting;IP networks;Network topology;Computer science;Application software;Scalability},
+doi={10.1109/PTP.2003.1231532},
+ISSN={},
+month={Sep.},}
+
+@inproceedings{Chord,
+ author = {Stoica, Ion and Morris, Robert and Karger, David and Kaashoek, M. Frans and Balakrishnan, Hari},
+ title = {Chord: A Scalable Peer-to-peer Lookup Service for Internet Applications},
+ booktitle = {Proceedings of the 2001 Conference on Applications, Technologies, Architectures, and Protocols for Computer Communications},
+ series = {SIGCOMM '01},
+ year = {2001},
+ isbn = {1-58113-411-8},
+ location = {San Diego, California, USA},
+ pages = {149--160},
+ numpages = {12},
+ url = {http://doi.acm.org/10.1145/383059.383071},
+ doi = {10.1145/383059.383071},
+ acmid = {383071},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+} 
+
+@article{Pastry,
+author = {Rowstron, Antony and Druschel, Peter},
+year = {2001},
+month = {01},
+pages = {329-350},
+title = {Pastry: Scalable, Decentralized Object Location and Routing for Large-Scale Peer-to-Peer Systems},
+volume = {2218},
+journal = {Lecture Notes in Computer Science - LNCS}
+}
+
+@inproceedings{Kademlia,
+title = {Kademlia: A Peer-to-Peer Information System Based on the XOR Metric},
+author = {Petar Maymounkov and David Mazières},
+year = {2002},
+series = {Druschel P., Kaashoek F., Rowstron A. (eds). Springer, Berlin, Heidelberg},
+publisher = {Springer Verlag},
+booktitle = {Peer-to-Peer Systems},
+}
+
+@inproceedings{pass2017analysis,
+  title={Analysis of the blockchain protocol in asynchronous networks},
+  author={Pass, Rafael and Seeman, Lior and Shelat, Abhi},
+  booktitle={Annual International Conference on the Theory and Applications of Cryptographic Techniques},
+  pages={643--673},
+  year={2017},
+  organization={Springer}
+}
+
+@misc{supple,
+  title = {{Supplementary material}},
+  howpublished = "\url{https://github.com/e2b2c44d/bf75/blob/master/supplements.pdf}"
+}
+
+@inproceedings{Elastico,
+	author = {Luu, Loi and Narayanan, Viswesh and Zheng, Chaodong and Baweja, Kunal and Gilbert, Seth and Saxena, Prateek},
+	title = {A Secure Sharding Protocol For Open Blockchains},
+	booktitle = {Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security},
+	series = {CCS '16},
+	year = {2016},
+	isbn = {978-1-4503-4139-4},
+	location = {Vienna, Austria},
+	pages = {17--30},
+	numpages = {14},
+	url = {http://doi.acm.org/10.1145/2976749.2978389},
+	doi = {10.1145/2976749.2978389},
+	acmid = {2978389},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	keywords = {bitcoin, consensus protocol, sharding},
+} 
+
+@inproceedings {Vault,
+	author = {Derek Leung and Adam Suhl and Yossi Gilad and Nickolai Zeldovich},
+	title = {Vault: Fast Bootstrapping for Cryptocurrencies},
+	booktitle = {Proceedings of the 2019 Annual Network and Distributed System Security Symposium (NDSS)},
+	year = {2019},
+	address = {San Diego, CA},
+}
+
+@inproceedings {Monoxide,
+	author = {Jiaping Wang and Hao Wang},
+	title = {Monoxide: Scale out Blockchains with Asynchronous Consensus Zones},
+	booktitle = {16th {USENIX} Symposium on Networked Systems Design and Implementation ({NSDI} 19)},
+	year = {2019},
+	isbn = {978-1-931971-49-2},
+	address = {Boston, MA},
+	pages = {95--112},
+	url = {https://www.usenix.org/conference/nsdi19/presentation/wang-jiaping},
+	publisher = {{USENIX} Association},
+}
+
+@inproceedings{Nayak2016,
+	Author = {Kartik Nayak and Srijan Kumar and Miller, {Andrew Edmund} and Elaine Shi},
+	Booktitle = {IEEE European Symposium on Security and Privacy},
+	Date-Added = {2018-05-03 17:48:03 +0000},
+	Date-Modified = {2018-05-03 17:49:05 +0000},
+	Pages = {305--320},
+	Title = {Stubborn Mining: Generalizing Selfish Mining and Combining with an Eclipse Attack},
+	Year = {2016}
+}
+
+@inproceedings{Nightingale06,
+	Author = {Edmund B. Nightingale and Kaushik Veeraraghavan and Peter M. Chen and Jason Flinn},
+	Booktitle = {In Proc. 7th Symposium on Operating Systems Design and Implementation (OSDI '06},
+	Date-Added = {2018-05-03 08:01:39 +0000},
+	Date-Modified = {2018-05-03 08:01:51 +0000},
+	Pages = {1--14},
+	Title = {Rethink the sync},
+	Year = {2006}}
+	
+@misc{DwarfPool,
+	Author = {DwarfPool},	
+	Howpublished = {\url{https://www.reddit.com/r/ethereum/comments/57c1yn/why_dwarfpool_mines_mostly_empty_blocks_and_only/}},
+	Title = {Why DwarfPool mines mostly empty blocks and only few ones with transactions},
+	Year = {2016}}
+	
+@misc{jp,
+	Author = {JP Buntinx},	
+	Howpublished = {\url{https://themerkle.com/f2pool-allegedly-prevented-users-from-investing-in-status-ico/}},
+	Title = {F2Pool Allegedly Prevented Users From Investing in Status ICO},
+	Year = {2017}}
+	
+@misc{secbit,
+	Author = {SECBIT},	
+	Howpublished = {\url{https://medium.com/coinmonks/how-the-winner-got-fomo3d-prize-a-detailed-explanation-b30a69b7813f}},
+	Title = {How the winner got Fomo3D prize - A Detailed Explanation},
+	Year = {2018}}
+	
+@misc{DeloitteHealthCare,
+	Author = {Deloitte},
+	Date-Added = {2018-05-03 07:56:10 +0000},
+	Date-Modified = {2018-05-03 07:56:49 +0000},
+	Howpublished = {\url{https://www2.deloitte.com/us/en/pages/public-sector/articles/blockchain-opportunities-for-health-care.html}},
+	Title = {Blockchain: Opportunities for health care},
+	Year = {2018}}
+	
+@misc{timejacking,
+	Author = {corbixgwelt},	
+	url = {http://culubas.blogspot.de/2011/05/timejacking-bitcoin\_802.html},
+	Title = {Timejacking and bitcoin.},
+	Year = {2011}}
+
+@misc{IBMSupplyChain,
+	Author = {IBM},
+	Date-Added = {2018-05-03 07:54:45 +0000},
+	Date-Modified = {2018-05-03 07:55:07 +0000},
+	Howpublished = {\url{https://www.ibm.com/blockchain/supply-chain/}},
+	Title = {Blockchain for Supply Chain},
+	Year = {2020}}
+
+@misc{DeloitteFinancial,
+	Author = {Deloitte},
+	Howpublished = {\url{http://blog.deloitte.com.ng/5-blockchain-use-cases-in-financial-services/}},
+	Title = {5 blockchain technology use cases in financial services},
+	Year = {2017}}
+
+@misc{visa,
+	Author = {Visa},
+	Date-Added = {2018-05-03 07:45:06 +0000},
+	Date-Modified = {2018-05-03 07:46:53 +0000},
+	Howpublished = {\url{https://usa.visa.com/run-your-business/small-business-tools/retail.html}},
+	Title = {Small Business Retail},
+	Year = {2012}}
+
+@misc{bitcoin,
+	Author = {Satoshi Nakamoto},	
+	Howpublished = {\url{http://bitcoin.org/bitcoin.pdf}},
+	Title = {Bitcoin: A peer-to-peer electronic cash system},
+	Year = {2008}
+}
+
+@misc{compactblock,
+	Author = {Matt Corallo},
+	Howpublished = {\url{https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki}},
+	Title = {Compact block relay. BIP 152},
+	Year = {2017}}
+
+@misc{discretemath,
+	Author={Herbert Edelsbrunner and Brittany Fasy},
+	Howpublished = {\url{https://www2.cs.duke.edu/courses/cps102/spring09/Lectures/L-18.pdf}},
+	Title = {Probability in Hashing}}
+
+@misc{bitcoin-diffusion,
+	Howpublished = {\url{https://bit.ly/2Q2Djux}},
+	Title = {Bitcoin core commit 5400ef}}
+
+@misc{aws-latency-test,
+	Howpublished = {\url{https://ping.psa.fun/}},
+	Title = {{AWS} latency test}}
+
+@misc{neudecker-bitcoin,
+	title = {Characterization of the Bitcoin Peer-to-Peer Network (2015-2018)},
+	author = {Neudecker, Till},
+	howpublished={\url{http://dsn.tm.kit.edu/bitcoin/publications/bitcoin_network_characterization.pdf}},
+	year = {2019}
+}
+
+@InProceedings{SipHash,
+	author="Aumasson, Jean-Philippe and Bernstein, Daniel J.",
+	editor="Galbraith, Steven and Nandi, Mridul",
+	title="SipHash: A Fast Short-Input PRF",
+	booktitle="Progress in Cryptology - INDOCRYPT 2012",
+	year="2012",
+	publisher="Springer Berlin Heidelberg",
+	address="Berlin, Heidelberg",
+	pages="489--508",
+	abstract="SipHash is a family of pseudorandom functions optimized for short inputs. Target applications include network traffic authentication and hash-table lookups protected against hash-flooding denial-of-service attacks. SipHash is simpler than MACs based on universal hashing, and faster on short inputs. Compared to dedicated designs for hash-table lookup, SipHash has well-defined security goals and competitive performance. For example, SipHash processes a 16-byte input with a fresh key in 140 cycles on an AMD FX-8150 processor, which is much faster than state-of-the-art MACs. We propose that hash tables switch to SipHash as a hash function.",
+	isbn="978-3-642-34931-7"
+}
+
+@inproceedings{Tampering,
+ author = {Gervais, Arthur and Ritzdorf, Hubert and Karame, Ghassan O. and Capkun, Srdjan},
+ title = {Tampering with the Delivery of Blocks and Transactions in Bitcoin},
+ booktitle = {Proceedings of the 22Nd ACM SIGSAC Conference on Computer and Communications Security},
+ series = {CCS '15},
+ year = {2015},
+ isbn = {978-1-4503-3832-5},
+ location = {Denver, Colorado, USA},
+ pages = {692--705},
+ numpages = {14},
+ url = {http://doi.acm.org/10.1145/2810103.2813655},
+ doi = {10.1145/2810103.2813655},
+ acmid = {2813655},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {bitcoin, countermeasures., preventing object delivery},
+} 
+
+@inproceedings{ByzCoin,
+	Author = {Kogias, Eleftherios Kokoris and Jovanovic, Philipp and Gailly, Nicolas and Khoffi, Ismail and Gasser, Linus and Ford, Bryan},
+	Booktitle = {25th USENIX Security Symposium (USENIX Security 16)},
+	Pages = {279--296},
+	Title = {Enhancing bitcoin security and performance with strong consistency via collective signing},
+	Year = {2016}}
+
+@inproceedings{Hybrid,
+	Author = {Pass, Rafael and Shi, Elaine},
+	Booktitle = {LIPIcs-Leibniz International Proceedings in Informatics},
+	Organization = {Schloss Dagstuhl-Leibniz-Zentrum fuer Informatik},
+	Title = {Hybrid consensus: Efficient consensus in the permissionless model},
+	Volume = {91},
+	Year = {2017}}
+
+@inproceedings{BitcoinNG,
+	Author = {Eyal, Ittay and Gencer, Adem Efe and Sirer, Emin G{\"u}n and Van Renesse, Robbert},
+	Booktitle = {NSDI},
+	Pages = {45--59},
+	Title = {Bitcoin-NG: A Scalable Blockchain Protocol.},
+	Year = {2016}}
+	
+@article{optselfish,
+	author    = {Ayelet Sapirshtein and
+               Yonatan Sompolinsky and
+               Aviv Zohar},
+	title     = {Optimal Selfish Mining Strategies in Bitcoin},
+	journal   = {CoRR},
+	volume    = {abs/1507.06183},
+	year      = {2015},  
+}
+
+@inproceedings{Fruitchain,
+	Author = {Pass, Rafael and Shi, Elaine},
+	Booktitle = {Proceedings of the ACM Symposium on Principles of Distributed Computing},
+	Organization = {ACM},
+	Pages = {315--324},
+	Title = {Fruitchains: A fair blockchain},
+	Year = {2017}}
+
+@inproceedings{selfishmining,
+	Author = {Eyal, Ittay and Sirer, Emin G{\"u}n},
+	Booktitle = {International conference on financial cryptography and data security},
+	Organization = {Springer},
+	Pages = {436--454},
+	Title = {Majority is not enough: Bitcoin mining is vulnerable},
+	Year = {2014}}
+
+@article{PeerCoin,
+	Author = {King, Sunny and Nadal, Scott},
+	Journal = {https://peercoin.net/assets/paper/peercoin-paper.pdf.},
+	Title = {PPCoin: peer-to-peer crypto-currency with proof-of-stake (2012)},
+	Year = {2017}}
+
+@inproceedings{Algorand,
+	Author = {Gilad, Yossi and Hemo, Rotem and Micali, Silvio and Vlachos, Georgios and Zeldovich, Nickolai},
+	Booktitle = {Proceedings of the 26th Symposium on Operating Systems Principles},
+	Organization = {ACM},
+	Pages = {51--68},
+	Title = {Algorand: Scaling byzantine agreements for cryptocurrencies},
+	Year = {2017}}
+	
+@inproceedings{splitstream,
+	Author = {Castro, Miguel and Druschel, Peter and Kermarrec, Anne-Marie and Nandi, Animesh and Rowstron, Antony and Singh, Atul},
+	Booktitle = {Proceedings of the 19th ACM symposium on Operating Systems Principles},
+	Organization = {ACM},
+	Pages = {298--313},
+	Title = {SplitStream: high-bandwidth multicast in cooperative environments},
+	Year = {2003}}
+
+@inproceedings{chunkyspread,
+  author={V. {Venkataraman} and K. {Yoshida} and P. {Francis}},
+  booktitle={Proceedings of the 2006 IEEE International Conference on Network Protocols}, 
+  title={Chunkyspread: Heterogeneous Unstructured Tree-Based Peer-to-Peer Multicast}, 
+  year={2006},
+  volume={},
+  number={},
+  pages={2-11},}
+  
+@inproceedings{sanferm,
+author = {Cappos, Justin and Hartman, John H.},
+title = {San Ferm\'{\i}n: Aggregating Large Data Sets Using a Binomial Swap Forest},
+year = {2008},
+isbn = {1119995555221},
+publisher = {USENIX Association},
+address = {USA},
+booktitle = {Proceedings of the 5th USENIX Symposium on Networked Systems Design and Implementation},
+pages = {147–160},
+numpages = {14},
+location = {San Francisco, California},
+series = {NSDI’08}
+}
+	
+@inproceedings{hijacking,
+	Author = {Maria Apostolaki and Aviv Zohar and Laurent Vanbever},
+	Booktitle = {IEEE Symposium on Security and Privacy (SP)},	
+	Title = {Hijacking Bitcoin: Routing Attacks on Cryptocurrencies},
+	Year = {2017}}
+
+@inproceedings{HoneyBadgerBFT,
+	Author = {Miller, Andrew and Xia, Yu and Croman, Kyle and Shi, Elaine and Song, Dawn},
+	Booktitle = {Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security},
+	Organization = {ACM},
+	Pages = {31--42},
+	Title = {The honey badger of BFT protocols},
+	Year = {2016}}
+
+@misc{SPECTRE,
+	Author = {Sompolinsky, Yonatan and Lewenberg, Yoad and Zohar, Aviv},
+	Title = {SPECTRE: Serialization of proof-of-work events: confirming transactions via recursive elections},
+	Year = {2016}}
+
+@article{PHANTOM,
+	Author = {Sompolinsky, Yonatan and Wyborski, Shai and Zohar, Aviv},
+	Note = {https://eprint.iacr.org/2018/104.pdf},
+	Title = {PHANTOM and GHOSTDAG, A Scalable Generalization of Nakamoto Consensus},
+	Year = {2020}}
+
+@inproceedings{Ouroboros,
+	Author = {Kiayias, Aggelos and Russell, Alexander and David, Bernardo and Oliynykov, Roman},
+	Booktitle = {Annual International Cryptology Conference},
+	Organization = {Springer},
+	Pages = {357--388},
+	Title = {Ouroboros: A provably secure proof-of-stake blockchain protocol},
+	Year = {2017}}
+
+@article{Stellar,
+	Author = {Mazieres, David},
+	Journal = {Stellar Development Foundation},
+	Publisher = {Citeseer},
+	Title = {The stellar consensus protocol: A federated model for internet-level consensus},
+	Year = {2015}}
+	
+@book{gametheory,
+	Author = {Myerson, Roger. B.},	
+	Publisher = {Harvard University Press},
+	Title = {Game Theory},
+	Year = {2013}}
+
+@inproceedings{PBFT,
+	Author = {Castro, Miguel and Liskov, Barbara and others},
+	Booktitle = {OSDI},
+	Pages = {173--186},
+	Title = {Practical Byzantine fault tolerance},
+	Volume = {99},
+	Year = {1999}}
+
+@inproceedings{GHOST,
+	Author = {Sompolinsky, Yonatan and Zohar, Aviv},
+	Booktitle = {International Conference on Financial Cryptography and Data Security},
+	Organization = {Springer},
+	Pages = {507--527},
+	Title = {Secure high-rate transaction processing in bitcoin},
+	Year = {2015}}
+
+@inproceedings{inclusive,
+	Author = {Lewenberg, Yoad and Sompolinsky, Yonatan and Zohar, Aviv},
+	Booktitle = {International Conference on Financial Cryptography and Data Security},
+	Organization = {Springer},
+	Pages = {528--547},
+	Title = {Inclusive block chain protocols},
+	Year = {2015}}
+
+@misc{Bitcoin-core,
+	Howpublished = {\url{https://github.com/bitcoin/bitcoin}},
+	Title = {{Bitcoin Core}}}
+
+@misc{Bitcoin-confirmation,
+	Howpublished = {\url{https://en.bitcoin.it/wiki/Confirmation}},
+	Title = {{Bitcoin Wiki. Confirmation}}}
+
+@misc{Ethereum,
+	Howpublished = {\url{https://ethereum.org/en/whitepaper/}},
+	Title = {{Ethereum White Paper}},
+	Year = {2020}}
+
+@misc{bitcoin-fullnode,
+	Howpublished = {\url{https://bitnodes.earn.com/}},
+	Title = {{Bitnodes}}}
+
+@misc{eth-fullnode,
+	Howpublished = {\url{https://www.ethernodes.org/}},
+	Title = {{The ethereum node explorer}}}
+
+@article{casper,
+	Author = {Buterin, Vitalik and Griffith, Virgil},
+	Journal = {arXiv preprint arXiv:1710.09437},
+	Title = {Casper the Friendly Finality Gadget},
+	Year = {2017}}
+
+@inproceedings{erlay,
+author = {Naumenko, Gleb and Maxwell, Gregory and Wuille, Pieter and Fedorova, Alexandra and Beschastnikh, Ivan},
+title = {Erlay: Efficient Transaction Relay for Bitcoin},
+year = {2019},
+isbn = {9781450367479},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3319535.3354237},
+doi = {10.1145/3319535.3354237},
+abstract = {Bitcoin is a top-ranked cryptocurrency that has experienced huge growth and survived numerous attacks. The protocols making up Bitcoin must therefore accommodate the growth of the network and ensure security.Security of the Bitcoin network depends on connectivity between the nodes. Higher connectivity yields better security. In this paper we make two observations: (1) current connectivity in the Bitcoin network is too low for optimal security; (2) at the same time, increasing connectivity will substantially increase the bandwidth used by the transaction dissemination protocol, making it prohibitively expensive to operate a Bitcoin node. Half of the total bandwidth needed to operate a Bitcoin node is currently used to just announce transactions. Unlike block relay, transaction dissemination has received little attention in prior work.We propose a new transaction dissemination protocol, Erlay, that not only reduces the bandwidth consumption by 40% assuming current connectivity, but also keeps the bandwidth use almost constant as the connectivity increases. In contrast, the existing protocol increases the bandwidth consumption linearly with the number of connections. By allowing more connections at a small cost, Erlay improves the security of the Bitcoin network. And, as we demonstrate, Erlay also hardens the network against attacks that attempt to learn the origin node of a transaction. Erlay is currently being investigated by the Bitcoin community for future use with the Bitcoin protocol.},
+booktitle = {Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {817–831},
+numpages = {15},
+keywords = {distributed systems, bandwidth, gossip, peer-to-peer},
+location = {London, United Kingdom},
+series = {CCS '19}
+}
+
+@article{conflux,
+	Author = {Li, Chenxing and Li, Peilun and Zhou, Dong and Xu, Wei and Long, Fan and Yao, Andrew},
+	Journal = {arXiv preprint arXiv:1805.03870},
+	Title = {Scaling Nakamoto Consensus to Thousands of Transactions per Second},
+	Year = {2018}}
+	
+@inproceedings{prism,
+author = {Bagaria, Vivek and Kannan, Sreeram and Tse, David and Fanti, Giulia and Viswanath, Pramod},
+title = {Prism: Deconstructing the Blockchain to Approach Physical Limits},
+year = {2019},
+isbn = {9781450367479},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3319535.3363213},
+doi = {10.1145/3319535.3363213},
+abstract = {The concept of a blockchain was invented by Satoshi Nakamoto to maintain a distributed ledger. In addition to its security, important performance measures of a blockchain protocol are its transaction throughput and confirmation latency. In a decentralized setting, these measures are limited by two underlying physical network attributes: communication capacity and speed-of-light propagation delay. In this work we introduce Prism, a new proof-of-work blockchain protocol, which can achieve 1) security against up to 50% adversarial hashing power; 2) optimal throughput up to the capacity C of the network; 3) confirmation latency for honest transactions proportional to the propagation delay D, with confirmation error probability exponentially small in the bandwidth-delay product CD; 4) eventual total ordering of all transactions. Our approach to the design of this protocol is based on deconstructing Nakamoto's blockchain into its basic functionalities and systematically scaling up these functionalities to approach their physical limits.},
+booktitle = {Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {585–602},
+numpages = {18},
+keywords = {throughput, latency, blockchains, scalability, proof-of-work},
+location = {London, United Kingdom},
+series = {CCS '19}
+}
+
+@inproceedings{ohie,
+	Author = {Yu, Haifeng and Nikolic, Ivica and Hou, Ruomu and Saxena, Prateek},
+	Booktitle = {Proceedings of the IEEE Symposium on Security and Privacy},
+	Organization = {IEEE},
+	Title = {OHIE: Blockchain Scaling Made Simple},
+	Year = {2020}}
+	
+@inproceedings{epidemic,
+	Author = {Demers, Alan and Greene, Dan and Hauser, Carl and Irish, Wes and Larson, John and Shenker, Scott and Sturgis, Howard and Swinehart, Dan and Terry, Doug},
+	Booktitle = {Proceedings of the sixth annual ACM Symposium on Principles of Distributed Computing},
+	Publisher = {ACM},
+	Title = {Epidemic algorithms for replicated database maintenance},
+	Year = {1987}}
+
+@article{BFT1,
+	Author = {Abd-El-Malek, Michael and Ganger, Gregory R and Goodson, Garth R and Reiter, Michael K and Wylie, Jay J},
+	Journal = {ACM SIGOPS Operating Systems Review},
+	Number = {5},
+	Pages = {59--74},
+	Publisher = {ACM},
+	Title = {Fault-scalable Byzantine fault-tolerant services},
+	Volume = {39},
+	Year = {2005}}
+
+@inproceedings{BFT2,
+	Author = {Clement, Allen and Wong, Edmund L and Alvisi, Lorenzo and Dahlin, Michael and Marchetti, Mirco},
+	Booktitle = {NSDI},
+	Pages = {153--168},
+	Title = {Making Byzantine Fault Tolerant Systems Tolerate Byzantine Faults.},
+	Volume = {9},
+	Year = {2009}}
+
+@inproceedings{BFT3,
+	Author = {Kotla, Ramakrishna and Alvisi, Lorenzo and Dahlin, Mike and Clement, Allen and Wong, Edmund},
+	Booktitle = {ACM SIGOPS Operating Systems Review},
+	Number = {6},
+	Organization = {ACM},
+	Pages = {45--58},
+	Title = {Zyzzyva: speculative byzantine fault tolerance},
+	Volume = {41},
+	Year = {2007}}
+
+@inproceedings{PSP,
+	Acmid = {2972548},
+	Address = {New York, NY, USA},
+	Author = {Decker, Christian and Wattenhofer, Roger},
+	Booktitle = {Proceedings of the 17th International Symposium on Stabilization, Safety, and Security of Distributed Systems - Volume 9212},
+	Doi = {10.1007/978-3-319-21741-3_1},
+	Isbn = {978-3-319-21740-6},
+	Numpages = {16},
+	Pages = {3--18},
+	Publisher = {Springer-Verlag New York, Inc.},
+	Title = {A Fast and Scalable Payment Network with Bitcoin Duplex Micropayment Channels},
+	Url = {http://dx.doi.org/10.1007/978-3-319-21741-3_1},
+	Year = {2015},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1007/978-3-319-21741-3_1}}
+	
+@inproceedings {eclipse-bitcoin,
+author = {Ethan Heilman and Alison Kendler and Aviv Zohar and Sharon Goldberg},
+title = {Eclipse Attacks on Bitcoin{\textquoteright}s Peer-to-Peer Network},
+booktitle = {24th {USENIX} Security Symposium ({USENIX} Security 15)},
+year = {2015},
+isbn = {978-1-931971-232},
+address = {Washington, D.C.},
+pages = {129--144},
+url = {https://www.usenix.org/conference/usenixsecurity15/technical-sessions/presentation/heilman},
+publisher = {{USENIX} Association},
+month = aug,
+}
+
+@misc{citydelay,
+	Howpublished = {\url{https://wondernetwork.com/pings}},
+	Title = {{Global ping statistics: Ping times between WonderNetwork servers}},
+	Author = {WonderNetwork},
+	Year = {Apr. 2018}}
+
+@misc{Ethereum-CryptoKitties,
+	Howpublished = {\url{https://www.cryptokitties.co/}},
+	Title = {{CryptoKitties}}}
+
+@misc{Bitcoin-Fee,
+	Howpublished = {\url{https://arstechnica.com/tech-policy/2017/12/bitcoin-fees-rising-high/}},
+	Title = {{Skyrocketing fees are fundamentally changing bitcoin}}}
+
+@misc{www-link-cut-tree,
+	Howpublished = {\url{https://en.wikipedia.org/wiki/Link/cut_tree}},
+	Title = {{Link/cut tree}}}
+
+@misc{delta-rep,
+	Howpublished = {\url{http://planarity.org/Klein_splay_trees_and_link-cut_trees.pdf}},
+	Title = {{Optimization Algorithms for Planar Graphs}}}
+
+@misc{www-splay-tree,
+	Howpublished = {\url{https://en.wikipedia.org/wiki/Splay_tree}},
+	Title = {{Splay tree}}}
+
+@misc{Parity,
+	Howpublished = {\url{https://github.com/paritytech/parity-ethereum}},
+	Title = {{parity-ethereum}}}
+
+@misc{Avalanche,
+	Howpublished = {\url{https://ipfs.io/ipfs/QmUy4jh5mGNZvLkjies1RWM4YuvJh5o2FYopNPVYwrRVGV}},
+	Title = {{Snowflake to Avalanche: A Novel Metastable Consensus Protocol Family for Cryptocurrencies}}}
+	
+@misc{eclipse-eth,
+    author = {Yuval Marcus and Ethan Heilman and Sharon Goldberg},
+    title = {Low-Resource Eclipse Attacks on Ethereum's Peer-to-Peer Network},
+    howpublished = {Cryptology ePrint Archive, Report 2018/236},
+    year = {2018},
+    note = {\url{https://eprint.iacr.org/2018/236}},
+}
+
+@misc{info-prop,
+    author = {Christian Decker and Roger Wattenhofer},
+    title = {Information propagation in the Bitcoin network},
+    howpublished = {IEEE P2P 2013 Proceedings},
+    year = {2013},
+    note = {\url{https://doi.org/10.1109/P2P.2013.6688704}},
+}
+
+@inproceedings{OmniLedger,
+  title={Omniledger: A secure, scale-out, decentralized ledger via sharding},
+  author={Kokoris-Kogias, Eleftherios and Jovanovic, Philipp and Gasser, Linus and Gailly, Nicolas and Syta, Ewa and Ford, Bryan},
+  booktitle={2018 IEEE Symposium on Security and Privacy (SP)},
+  pages={583--598},
+  year={2018},
+  organization={IEEE}
+}
+
+@article{rapidchain,
+  title={RapidChain: A Fast Blockchain Protocol via Full Sharding},
+  author={Zamani, Mahdi and Movahedi, Mahnush and Raykova, Mariana}
+}
+
+@inproceedings{deano,
+author = {Biryukov, Alex and Khovratovich, Dmitry and Pustogarov, Ivan},
+title = {Deanonymisation of Clients in Bitcoin P2P Network},
+year = {2014},
+isbn = {9781450329576},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2660267.2660379},
+doi = {10.1145/2660267.2660379},
+abstract = {Bitcoin is a digital currency which relies on a distributed set of miners to mint coins and on a peer-to-peer network to broadcast transactions. The identities of Bitcoin users are hidden behind pseudonyms (public keys) which are recommended to be changed frequently in order to increase transaction unlinkability.We present an efficient method to deanonymize Bitcoin users, which allows to link user pseudonyms to the IP addresses where the transactions are generated. Our techniques work for the most common and the most challenging scenario when users are behind NATs or firewalls of their ISPs. They allow to link transactions of a user behind a NAT and to distinguish connections and transactions of different users behind the same NAT. We also show that a natural countermeasure of using Tor or other anonymity services can be cut-off by abusing anti-DoS countermeasures of the Bitcoin network. Our attacks require only a few machines and have been experimentally verified. The estimated success rate is between 11% and 60% depending on how stealthy an attacker wants to be. We propose several countermeasures to mitigate these new attacks.},
+booktitle = {Proceedings of the 2014 ACM SIGSAC Conference on Computer and Communications Security},
+pages = {15–29},
+numpages = {15},
+keywords = {bitcoin, tor, p2p, anonymity},
+location = {Scottsdale, Arizona, USA},
+series = {CCS '14}
+}
