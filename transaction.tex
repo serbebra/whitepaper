@@ -1,11 +1,11 @@
 % !TEX root=./whitepaper.tex
 \section{Transactional Processing on Key-Value Store}
 
-\project employs concurrency control in the key-value runtime to support transactional processing for concurrent operations on multiple keys. 
+\projabbrev Storage employs concurrency control in the key-value runtime to support transactional processing for concurrent operations on multiple keys. 
 This concurrency control mechanism is optimistic and hinges on the total ordering of log entries enforced by the underlying log layer. 
 Figure~\ref{fig:tx} illustrates the mechanism.
 
-When an application server linking with the \project key-value runtime starts a transaction using \texttt{BeginTx()} interface, it notifies the runtime that the transaction will work on the current state snapshot constructed by playing the log to the current tail.
+When an application server linking with the \projabbrev Storage key-value runtime starts a transaction using \texttt{BeginTx()} interface, it notifies the runtime that the transaction will work on the current state snapshot constructed by playing the log to the current tail.
 The further key-value operations before the invocation of \texttt{EndTx()} updates the key-values locally in the server without exposing the updates to the log. 
 When \texttt{EndTx()} is invoked, the runtime composes a \emph{commit record} containing the log position the transaction starts from and the read-write set of the transaction.  
 This commit record is then appended to the log.
@@ -13,7 +13,7 @@ This commit record is then appended to the log.
 \begin{figure}[H]	
 	%\vspace{-6mm}
 	\includegraphics[width=\textwidth]{figure/tx-crop.pdf}
-	\caption{Transactional Processing on \project KV Store}
+	\caption{Transactional Processing on \projabbrev Storage KV Store}
 	\label{fig:tx}
 	%\vspace{-10mm}
 \end{figure}

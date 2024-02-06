@@ -2,13 +2,13 @@
 
 \section{Incentive Mechanism}
 
-This section describes the incentive mechanism design of the \project network, which consists of two types of actors: users and miners (a.k.a. storage nodes).
+This section describes the incentive mechanism design of the \projabbrev Storage, which consists of two types of actors: users and miners (a.k.a. storage nodes).
 Users pay tokens (\token) to create data entries in the log and add data to the network.
 Miners provide data service and receive tokens (\token) as reward from the network.
 The payment from users to miners is mediated by the \project network,
 since the service is sustained by the whole network rather than some specific miner.
 
-\project implements storage service in a ``pay once, storage forever'' manner.
+\projabbrev Storage implements storage service in a ``pay once, storage forever'' manner.
 Users pay a one-shot storage endowment for each created data entry, and thereafter the endowment is used to incentivize miners who maintain that data entry.
 
 
@@ -23,10 +23,10 @@ then the storage reward accumulates and hence induces a higher payoff to miners 
 
 \subsection{Storage Request Pricing}
 
-The cost of each \project storage request is composed of two parts: fee and storage endowment.
+The cost of each \projabbrev Storage request is composed of two parts: fee and storage endowment.
 The fee part is paid to host chain miners/validators for invoking the \project contract to process storage request and add new data entry into the log, which is priced as other smart contract invocation transactions.
 In what follows we focus on the storage endowment part, 
-which supports the perpetual reward to \project miners who serve the corresponding data.
+which supports the perpetual reward to \projabbrev Storage miners who serve the corresponding data.
 
 Given a data storage request $\sr$ with specific amount of endowment $\sr_{endowment}$ and size of committed data $\sr_{data\_size}$ (measured in number of \sectorsize sectors),
 the unit price of $\sr$ is calculated as follows:
@@ -50,9 +50,9 @@ Miners answer the queries repeatly and computes an output digest for each loaded
 %
 {\sproof} will stress the miners' disk I/O and reduce their capability in responding user queries.
 %
-So {\project} adopts intermittent mining, in which 
+So \projabbrev Storage adopts intermittent mining, in which 
 %
-a mining epoch starts with a block generation at a specific block height on the host chain and stops when a valid {\sproof} is submitted to the {\project} contract. 
+a mining epoch starts with a block generation at a specific block height on the host chain and stops when a valid {\sproof} is submitted to the \projabbrev Storage contract. 
 
 In a strawman design, a \sproof iteration consists of a computing stage and a loading stage. 
 %
@@ -76,7 +76,7 @@ In the following, we introduce some major considerations in improving the fairne
 
 \subsubsection{Fairness for Small Miners}
 
-When the storage size of the {\project} network significantly exceeds the storage capacity of a single machine, a single machine will take almost all the time in finding an available recall position. 
+When the storage size of the \projabbrev Storage network significantly exceeds the storage capacity of a single machine, a single machine will take almost all the time in finding an available recall position. 
 %
 This makes the {\sproof} becomes proof of work. 
 %
@@ -88,7 +88,7 @@ For large miners have enough machines to store all the data, it can mine on diff
 
 \subsubsection{Disincentivize Storage Outsourcing}
 
-To promote the whole network storing enough replicas of data chunks, {\project} limits the reward share of a single miner with a single storage replica.
+To promote the whole network storing enough replicas of data chunks, \projabbrev Storage limits the reward share of a single miner with a single storage replica.
 %
 {\sproof} mechanism seals the data for each miner in different ways, challenges the accessing of sealed data, and prevents mining with data chunks from others. 
 % 
@@ -143,7 +143,7 @@ However, a mining farm can significantly increase its I/O compared to normal min
 %
 As the DDR memory has a significantly larger bandwidth compared to SSD, the mining farm can produce much more hashrate while contributing negligible to the data storage. 
 
-{\project} prevents this behavior by imposing a large amount of data transfer from the computing stage to the loading stage to encourage miners completing two stages on the same machine. 
+\projabbrev Storage prevents this behavior by imposing a large amount of data transfer from the computing stage to the loading stage to encourage miners completing two stages on the same machine. 
 %
 So if the computing stage and loading stage are seperated different machines, the hashrate is bounded by the network bandwidth, which is usually smaller than the storage I/O bandwidth.
 %
@@ -272,7 +272,7 @@ Precisely, the mining process has following steps:
 \subsection{Mining Reward}
 \label{subsec:mining reward}
 
-{\project} creates pricing segments every 8 GB of data chunks over the data flow. 
+\projabbrev Storage creates pricing segments every 8 GB of data chunks over the data flow. 
 %
 Each pricing segment is associated with an \emph{Endowment Pool} and a \emph{Reward Pool}. 
 %
@@ -282,7 +282,7 @@ The rate of reward release is set to 4\% per year.
 
 
 The mining reward is paid to miners for providing data service.
-Miners receive mining reward when submit the first legitimate {\sproof} for a mining epoch to {\project} mining contract.
+Miners receive mining reward when submit the first legitimate {\sproof} for a mining epoch to \projabbrev Storage contract.
 
 The mining reward consists of two parts:
 \begin{itemize}
@@ -302,7 +302,7 @@ The total reward for a new mining proof is thus:
 
 \subsection{How to Balance the Number of Replicas?}
 
-Every miner in \project network is required to explicitly claim the range of data entries that he maintains, 
+Every miner in \projabbrev Storage is required to explicitly claim the range of data entries that he maintains, 
 and then he can only use the claimed data in his mining process.
 That is, a miner cannot get mining reward from unclaimed data, and on the other hand the mining output is decreased if he fails to answer a challenge within his claimed range.
 As a result, a miner has no incentive to lie about the range of data used for mining.
@@ -325,7 +325,7 @@ However such mechanism is far from optimal due to the mismatch between willingne
 especially in the scenario of a storage network: 
 a newcomer cannot quickly bootstrap since it has nothing to share, whereas a powerful node with sufficient data has much less incentive to increase its ranking score.
 
-\project introduces a built-in royalty mechanism to incentivize data sharing behavior.
+\projabbrev Storage introduces a built-in royalty mechanism to incentivize data sharing behavior.
 The royalty mechanism allows a storage node to receive dividends 
 from the data it shared with others, 
 when a new mining proof is mined based on the shared data.
@@ -341,7 +341,7 @@ On the other hand, when the data is shared and by probability queried by the \sp
 
 More specifically, the royalty mechanism works as follows:
 \begin{itemize}
- 	\item The data requester sends his request to the \project contract to create a royalty record. Each royalty record includes the range of requested data entries, the designated data provider, and the length of royalty period.
+ 	\item The data requester sends his request to the \projabbrev Storage contract to create a royalty record. Each royalty record includes the range of requested data entries, the designated data provider, and the length of royalty period.
  	
  	\item The data provider, when observing a new request on the host chain, decides on its own whether or not to send requested data to the requester.
 
@@ -364,7 +364,7 @@ The expiration of royalty records is introduced for three reasons: a) in case a 
 b) a permanent royalty record does not make sense in practice, since the requester can always open a new account and hence renders the record useless;
 c) cleaning expired royalty records reduces overhead of maintaining royalty sharing relations.
 
-Furthermore, the history of data sharing and royalty dividends can be observed onchain, which improves the effectiveness of credit ranking in the \project network.
+Furthermore, the history of data sharing and royalty dividends can be observed onchain, which improves the effectiveness of credit ranking in the \projabbrev Storage network.
 
 
 % \section{Fairness and Counter-Cheating}

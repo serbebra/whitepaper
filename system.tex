@@ -1,18 +1,39 @@
 % !TEX root=./whitepaper.tex
-\section{System Design}
+\section{Overview of the System Design}
 
-\project employs layered design targetting to support different types of decentralized applications. Figure~\ref{fig:stack} shows the overview of the full stack layers of \project system. 
+\projabbrev system consists of a data availability layer (\projabbrev DA) on top of a decentralized storage system (\projabbrev Storage). 
+There is a separate consensus network that is part of both the \projabbrev DA and the \projabbrev Storage. 
+For \projabbrev Storage, the consensus is responsible for determining the ordering of the uploaded data blocks, realizing the storage mining verification and the corresponding incentive mechanism through smart contract. For \projabbrev DA, the consensus is in charge of guaranteeing the data availability property of each data block via data availability sampling. 
+In other words, each validator does data availability sampling independently, and once the majority of the validators reach the consensus of the successful sampling results, the data will be treated as available. 
+The data availability sampling is mainly to verify that the specific data block is not maliciously withheld by the client and is indeed ingested into the \projabbrev Storage where it is stored in a reliable and persistent way. 
+
+
+
+Figure~\ref{fig:0gda} illustrates the architecture of the \projabbrev system. When a data block enters the \projabbrev DA, it is first erasure coded and organized into multiple consecutive chunks through erasure coding. The merkle root as a commitment of the encoded data block is then submitted to the consensus layer to keep the order of the data entering the system. The chunks are then dispersed to different storage nodes in \projabbrev Storage where the data may be further replicated to other nodes depending on the storage fee that the user pays. The storage nodes periodically participate the mining process by interacting with the consensus network to accrue rewards from the system. 
+
+\begin{figure}[H]	
+	%\vspace{-6mm}
+	\includegraphics[width=\textwidth]{figure/0gda.pdf}
+	\caption{The architecture of the \projabbrev system.}
+	\label{fig:0gda}
+	%\vspace{-10mm}
+\end{figure}
+
+\section{Design of the \projabbrev Storage}
+
+
+\projabbrev Storage employs layered design targetting to support different types of decentralized applications. Figure~\ref{fig:stack} shows the overview of the full stack layers of \projabbrev Storage. 
 
 \begin{figure}[H]	
 	%\vspace{-6mm}
 	\includegraphics[width=\textwidth]{figure/stack-crop.pdf}
-	\caption{Full Stack Solution of Ionian}
+	\caption{Full stack solution of \projabbrev Storage.}
 	\label{fig:stack}
 	%\vspace{-10mm}
 \end{figure}
 
 The lowest is a log layer that is a decentralized system. It consists of multiple storage nodes to form a storage network. The network has built-in incentive mechanism to reward the data storage. The ordering of the uploaded data is guaranteed by a sequencing mechanism to provide a log-based semantics and abstraction. This layer is used to store unstructured raw data for permanent persistency.
 
-On top of the log layer, \project provides a Key-Value store runtime to manage structured data with mutability. Multiple key-value store nodes share the underlying log system. They put the structured key-value data structure into the log entry and append to the log system. They play the log entries in the shared log to construct the consistent state snapshot of the key-value store. The throughput and latency of the key-value store are bounded by the log system, so that the efficiency of the log layer is critical to the performance of the entire system. The key-value store can associate access control information with the keys to manage the update permission for the data. This enables the applications like social network, e.g., decentralized Twitter, which requires the maintenance for the ownership of the messages created by the users. 
+On top of the log layer, \projabbrev Storage provides a Key-Value store runtime to manage structured data with mutability. Multiple key-value store nodes share the underlying log system. They put the structured key-value data structure into the log entry and append to the log system. They play the log entries in the shared log to construct the consistent state snapshot of the key-value store. The throughput and latency of the key-value store are bounded by the log system, so that the efficiency of the log layer is critical to the performance of the entire system. The key-value store can associate access control information with the keys to manage the update permission for the data. This enables the applications like social network, e.g., decentralized Twitter, which requires the maintenance for the ownership of the messages created by the users. 
 
-\project further provides transactional semantics on the key-value store runtime to enable concurrent updates for the keys from multiple users who have the write access permission. The total order of the log entries guaranteed by the underlying log system provides the foundation for the concurrency control of the transactional executions on top of the key-value store. With this capability, \project can support decentralized applications like collaborative editing and even database workloads.    
+\projabbrev Storage further provides transactional semantics on the key-value store runtime to enable concurrent updates for the keys from multiple users who have the write access permission. The total order of the log entries guaranteed by the underlying log system provides the foundation for the concurrency control of the transactional executions on top of the key-value store. With this capability, \projabbrev Storage can support decentralized applications like collaborative editing and even database workloads.    
