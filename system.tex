@@ -2,14 +2,14 @@
 \section{Overview of the System Design}
 
 \projabbrev system consists of a data availability layer (\projabbrev DA) on top of a decentralized storage system (\projabbrev Storage). 
-There is a separate consensus network that is part of both the \projabbrev DA and the \projabbrev Storage. 
-For \projabbrev Storage, the consensus is responsible for determining the ordering of the uploaded data blocks, realizing the storage mining verification and the corresponding incentive mechanism through smart contract. For \projabbrev DA, the consensus is in charge of guaranteeing the data availability property of each data block via data availability sampling. 
-In other words, each validator does data availability sampling independently, and once the majority of the validators reach the consensus of the successful sampling results, the data will be treated as available. 
+There are one or multiple separate consensus networks that are part of both the \projabbrev DA and the \projabbrev Storage. 
+For \projabbrev Storage, each consensus network is responsible for determining the ordering of the uploaded data blocks, realizing the storage mining verification and the corresponding incentive mechanism through smart contract. For \projabbrev DA, the consensus is in charge of guaranteeing the data availability property of each data block via data availability sampling. 
+In other words, each validator in a consensus network does data availability sampling independently, and once the majority of the validators reach the consensus of the successful sampling results, the data will be treated as available. 
 The data availability sampling is mainly to verify that the specific data block is not maliciously withheld by the client and is indeed ingested into the \projabbrev Storage where it is stored in a reliable and persistent way. 
 
 
 
-Figure~\ref{fig:0gda} illustrates the architecture of the \projabbrev system. When a data block enters the \projabbrev DA, it is first erasure coded and organized into multiple consecutive chunks through erasure coding. The merkle root as a commitment of the encoded data block is then submitted to the consensus layer to keep the order of the data entering the system. The chunks are then dispersed to different storage nodes in \projabbrev Storage where the data may be further replicated to other nodes depending on the storage fee that the user pays. The storage nodes periodically participate the mining process by interacting with the consensus network to accrue rewards from the system. 
+Figure~\ref{fig:0gda} illustrates the architecture of the \projabbrev system when deploying a single consensus network. When a data block enters the \projabbrev DA, it is first erasure coded and organized into multiple consecutive chunks through erasure coding. The merkle root as a commitment of the encoded data block is then submitted to the consensus layer to keep the order of the data entering the system. The chunks are then dispersed to different storage nodes in \projabbrev Storage where the data may be further replicated to other nodes depending on the storage fee that the user pays. The storage nodes periodically participate the mining process by interacting with the consensus network to accrue rewards from the system. 
 
 \begin{figure}[H]	
 	%\vspace{-6mm}
@@ -18,6 +18,16 @@ Figure~\ref{fig:0gda} illustrates the architecture of the \projabbrev system. Wh
 	\label{fig:0gda}
 	%\vspace{-10mm}
 \end{figure}
+
+When deployed with multiple POS-based consensus networks, each validator participates the maintenance of all the consensus networks by using a shared staking status.
+The shared staking status can be recorded in a smart contract on one of the multiple consensus networks or a blockchain network outside of the \projabbrev consensus network set, e.g., Ethereum. 
+Assuming $C_0$ is the consensus network that maintains the shared staking status, and token $T_0$ on $C_0$ is used to be staked for POS vote.  
+When token $T_i$ is produced on network $C_i$ ($i \neq 0$) via incentives, it can be mapped to $T_0$ on $C_0$ by burning $T_i$ on $C_i$ through a secure cross-chain bridge chanel.
+When a validator maintains the POS protocol in any network $C_i$, it always uses the amount of staked $T_0$ on $C_0$ as its voting power in $C_i$. 
+Therefore, all the network $C_i$ share the same level of POS security. 
+By using Ethereum as netwrok $C_0$, it brings the benefit of incarnating the token $T_0$ as a standard ERC20 token and also enables the easy integration with existing popular restaking framework like EigenLayer~\cite{eigenlayer}.
+Note that, the sources of the shared staking status may also come from the high value tokens (e.g., BTC and ETH) in restaking frameworks like EigenLayer and Babylon~\cite{babylon}, so that to make \projabbrev consensus reach the Bitcoin or Ethereum level of security.  
+As illustrated in Figure~\ref{fig:scale}, this shared staking design introduces the unlimited scalability to \projabbrev system.
 
 \section{Design of the \projabbrev Storage}
 
