@@ -29,10 +29,20 @@ By using Ethereum as netwrok $C_0$, it brings the benefit of incarnating the tok
 Note that, the sources of the shared staking status may also come from the high value tokens (e.g., BTC and ETH) in restaking frameworks like EigenLayer and Babylon~\cite{babylon}, so that to make \projabbrev consensus reach the Bitcoin or Ethereum level of security.  
 As illustrated in Figure~\ref{fig:scale}, this shared staking design introduces the unlimited scalability to \projabbrev system.
 
+\begin{figure}[H]	
+	%\vspace{-6mm}
+	\includegraphics[width=\textwidth]{figure/scale.pdf}
+	\caption{The infinite scalability of the \projabbrev system.}
+	\label{fig:scale}
+	%\vspace{-10mm}
+\end{figure}
+
 \section{Design of the \projabbrev Storage}
 
 
 \projabbrev Storage employs layered design targetting to support different types of decentralized applications. Figure~\ref{fig:stack} shows the overview of the full stack layers of \projabbrev Storage. 
+
+The lowest is a log layer that is a decentralized system. It consists of multiple storage nodes to form a storage network. The network has built-in incentive mechanism to reward the data storage. The ordering of the uploaded data is guaranteed by a sequencing mechanism to provide a log-based semantics and abstraction. This layer is used to store unstructured raw data for permanent persistency.
 
 \begin{figure}[H]	
 	%\vspace{-6mm}
@@ -41,8 +51,6 @@ As illustrated in Figure~\ref{fig:scale}, this shared staking design introduces 
 	\label{fig:stack}
 	%\vspace{-10mm}
 \end{figure}
-
-The lowest is a log layer that is a decentralized system. It consists of multiple storage nodes to form a storage network. The network has built-in incentive mechanism to reward the data storage. The ordering of the uploaded data is guaranteed by a sequencing mechanism to provide a log-based semantics and abstraction. This layer is used to store unstructured raw data for permanent persistency.
 
 On top of the log layer, \projabbrev Storage provides a Key-Value store runtime to manage structured data with mutability. Multiple key-value store nodes share the underlying log system. They put the structured key-value data structure into the log entry and append to the log system. They play the log entries in the shared log to construct the consistent state snapshot of the key-value store. The throughput and latency of the key-value store are bounded by the log system, so that the efficiency of the log layer is critical to the performance of the entire system. The key-value store can associate access control information with the keys to manage the update permission for the data. This enables the applications like social network, e.g., decentralized Twitter, which requires the maintenance for the ownership of the messages created by the users. 
 
