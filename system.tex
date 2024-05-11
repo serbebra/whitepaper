@@ -3,13 +3,10 @@
 
 \projabbrev system consists of a data availability layer (\projabbrev DA) on top of a decentralized storage system (\projabbrev Storage). 
 There are one or multiple separate consensus networks that are part of both the \projabbrev DA and the \projabbrev Storage. 
-For \projabbrev Storage, each consensus network is responsible for determining the ordering of the uploaded data blocks, realizing the storage mining verification and the corresponding incentive mechanism through smart contract. For \projabbrev DA, the consensus is in charge of guaranteeing the data availability property of each data block via data availability sampling. 
-In other words, each validator in a consensus network does data availability sampling independently, and once the majority of the validators reach the consensus of the successful sampling results, the data will be treated as available. 
-The data availability sampling is mainly to verify that the specific data block is not maliciously withheld by the client and is indeed ingested into the \projabbrev Storage where it is stored in a reliable and persistent way. 
+For \projabbrev Storage, each consensus network is responsible for determining the ordering of the uploaded data blocks, realizing the storage mining verification and the corresponding incentive mechanism through smart contract. For \projabbrev DA, the consensus is in charge of guaranteeing the data availability property of each data block via verifying the aggregated signatures from the corresponding data availability quorum. 
 
-
-
-Figure~\ref{fig:0gda} illustrates the architecture of the \projabbrev system when deploying a single consensus network. When a data block enters the \projabbrev DA, it is first erasure coded and organized into multiple consecutive chunks through erasure coding. The merkle root as a commitment of the encoded data block is then submitted to the consensus layer to keep the order of the data entering the system. The chunks are then dispersed to different storage nodes in \projabbrev Storage where the data may be further replicated to other nodes depending on the storage fee that the user pays. The storage nodes periodically participate the mining process by interacting with the consensus network to accrue rewards from the system. 
+Figure~\ref{fig:0gda} illustrates the architecture of the \projabbrev system when deploying a single consensus network. When a data block enters the \projabbrev DA, it is first erasure coded and organized into multiple consecutive chunks through erasure coding. The merkle root as a commitment of the encoded data block is then submitted to the consensus layer to keep the order of the data entering the system. The chunks are then dispersed to different storage nodes in a quorum in \projabbrev Storage. The storage nodes periodically participate the mining process by interacting with the consensus network to accrue rewards from the system. 
+The DA client then collects the aggregated signatures from the quorum and submits the signatures to the consensus for verification.
 
 \begin{figure}[H]	
 	%\vspace{-6mm}
