@@ -2,108 +2,42 @@
 
 \section{Incentive Mechanism}
 
-This section describes the incentive mechanism design of the \projabbrev Storage, which consists of two types of actors: users and miners (a.k.a. storage nodes).
-Users pay tokens (\token) to create data entries in the log and add data to the network.
-Miners provide data service and receive tokens (\token) as reward from the network.
-The payment from users to miners is mediated by the \project network,
-since the service is sustained by the whole network rather than some specific miner.
+This section describes the incentive mechanism design of the \projabbrev Storage, which consists of two types of actors: users and miners (a.k.a. storage nodes). Users pay tokens (\token) to create data entries in the log and add data to the network. Miners provide data service and receive tokens (\token) as a reward from the network. The payment from users to miners is mediated by the \project network since the service is sustained by the entire network rather than specific miners.
 
-\projabbrev Storage implements storage service in a ``pay once, storage forever'' manner.
-Users pay a one-shot storage endowment for each created data entry, and thereafter the endowment is used to incentivize miners who maintain that data entry.
+\projabbrev Storage implements storage service in a "pay once, store forever" manner. Users pay a one-shot storage endowment for each created data entry, which is used to incentivize miners who maintain that data entry.
 
-
-The storage endowment is maintained per data entry,
-and a miner is only eligible for storage reward from data entries that he has access to.
-The total storage reward paid for a data entry is independent from the popularity of that data entry.
-For instance, a popular data entry stored by many miners will be frequently mined, but the reward is amortized among those miners;
-on the other hand, a less popular data entry is rarely mined, 
-then the storage reward accumulates and hence induces a higher payoff to miners who store this rare data entry.
-
-
+The storage endowment is maintained per data entry, and a miner is only eligible for storage rewards from data entries he has access to. The total storage reward paid for a data entry is independent of the popularity of that data entry. For instance, a popular data entry stored by many miners will be frequently mined, but the reward is shared among those miners. Conversely, a less popular data entry is rarely mined, so the storage reward accumulates and induces a higher payoff to miners who store this rare data entry.
 
 \subsection{Storage Request Pricing}
 
-The cost of each \projabbrev Storage request is composed of two parts: fee and storage endowment.
-The fee part is paid to host chain miners/validators for invoking the \project contract to process storage request and add new data entry into the log, which is priced as other smart contract invocation transactions.
-In what follows we focus on the storage endowment part, 
-which supports the perpetual reward to \projabbrev Storage miners who serve the corresponding data.
+The cost of each \projabbrev Storage request is composed of two parts: fee and storage endowment. The fee is paid to host chain miners/validators for invoking the \project contract to process the storage request and add a new data entry into the log, which is priced like other smart contract invocation transactions. The storage endowment part supports the perpetual reward to \projabbrev Storage miners who serve the corresponding data.
 
-Given a data storage request $\sr$ with specific amount of endowment $\sr_{endowment}$ and size of committed data $\sr_{data\_size}$ (measured in number of \sectorsize sectors),
-the unit price of $\sr$ is calculated as follows:
+Given a data storage request $\sr$ with a specific amount of endowment $\sr_{endowment}$ and size of committed data $\sr_{data\_size}$ (measured in number of \sectorsize sectors), the unit price of $\sr$ is calculated as follows:
 \begin{align}
 	\sr_{unit\_price} &= \sr_{endowment}/\sr_{data\_size}
 \end{align}
 
-This unit price $\sr_{unit\_price}$ must exceed a globally specified lower bound to be added to the log, otherwise the request will be pending until when the lower bound decreased below $\sr_{unit\_price}$ (in the meanwhile miners will most likely not store these unpaid data).
-Users are free to set a higher unit price $\sr_{unit\_price}$,
-which would motivate more storage nodes mining on that data entry and hence lead to better data availability.
-
-
+This unit price $\sr_{unit\_price}$ must exceed a globally specified lower bound to be added to the log. Otherwise, the request will be pending until the lower bound decreases below $\sr_{unit\_price}$. Users can set a higher unit price $\sr_{unit\_price}$ to motivate more storage nodes to mine on that data entry, leading to better data availability.
 
 \subsection{\proof}
 
-The \project network adopts a \proof (\sproof) mechanism to incentivize miners to store data.
-%
-By requiring miners to answer randomly produced queries to archived data chunks, the \sproof mechanism establishes the relation between mining proof generation power and data storage.
-%
-Miners answer the queries repeatly and computes an output digest for each loaded chunk util find a digest satisfies the mining difficulty (i.e., has enough leading zeros). 
-%
-{\sproof} will stress the miners' disk I/O and reduce their capability in responding user queries.
-%
-So \projabbrev Storage adopts intermittent mining, in which 
-%
-a mining epoch starts with a block generation at a specific block height on the host chain and stops when a valid {\sproof} is submitted to the \projabbrev Storage contract. 
+The \project network adopts a \proof (\sproof) mechanism to incentivize miners to store data. By requiring miners to answer randomly produced queries to archived data chunks, the \sproof mechanism establishes the relation between mining proof generation power and data storage. Miners answer the queries repeatedly and compute an output digest for each loaded chunk until a digest satisfies the mining difficulty (i.e., has enough leading zeros). 
 
-In a strawman design, a \sproof iteration consists of a computing stage and a loading stage. 
-%
-In the computing stage, a miner computes a random recall position (the universal offset in the flow) based on an arbitrary picked random nonce and a mining status read from the host chain.
-%
-In the loading stage, a miner loads the archived data chunks at the given recall position, and computes output digest by hashing the tuple of mining status and the data chunks. 
-%
-If the output digest satisfies the target difficulty, the miner can construct a legitimate \sproof consists of the chosen random nonce, the loaded data chunk and the proof for the correctness of data chunk to the mining contract. 
+The {\sproof} mechanism will stress the miners' disk I/O and reduce their capability in responding to user queries. Therefore, \projabbrev Storage adopts intermittent mining, where a mining epoch starts with a block generation at a specific block height on the host chain and stops when a valid {\sproof} is submitted to the \projabbrev Storage contract.
 
-In the following, we introduce some major considerations in improving the fairness in {\sproof} mining and formalize the {\sproof} mining mechanism. 
+In a basic design, a \sproof iteration consists of a computing stage and a loading stage. In the computing stage, a miner computes a random recall position (the universal offset in the flow) based on an arbitrary picked random nonce and mining status read from the host chain. In the loading stage, a miner loads the archived data chunks at the given recall position and computes the output digest by hashing the tuple of mining status and the data chunks. If the output digest satisfies the target difficulty, the miner can construct a legitimate \sproof consisting of the chosen random nonce, the loaded data chunk, and the proof of the correctness of the data chunk to the mining contract.
 
-%
-
-% More specifically, a legitimate \sproof must include the content of queried data chunks (together with the proof of data validity).
-% As a result, miners need to access archived data in order to generate \sproof's, 
-% and data storage service can be incentivized since it is the basis for proof generation power.
-
-% The \sproof challenges are computed from the mining status recorded in the \project contract.
-% To customize the challenges for every miner, these queries also depend on the miner's ID as well as timestamp and nonce.
-% \project further requires every miner to claim in advance wihch potion of data he stores, and a miner can only get mining reward by answering challenges within his claimed storage range. 
+The following sections introduce major considerations for improving fairness in {\sproof} mining and formalize the {\sproof} mining mechanism.
 
 \subsubsection{Fairness for Small Miners}
 
-When the storage size of the \projabbrev Storage network significantly exceeds the storage capacity of a single machine, a single machine will take almost all the time in finding an available recall position. 
-%
-This makes the {\sproof} becomes proof of work. 
-%
-To make the {\sproof} mining process be friendly to small miners with a single machine, the mining range is limited to a threshold 8 TB. 
-%
-When the size of archived data chunks exceeds 8 TB, a miner must specify a mining range over the data flow sequence in size of 8 TB.
-%
-For large miners have enough machines to store all the data, it can mine on different data ranges concurrently. 
+When the storage size of the \projabbrev Storage network significantly exceeds the storage capacity of a single machine, finding an available recall position becomes time-consuming for a single machine, effectively turning {\sproof} into a proof of work. To make the {\sproof} mining process friendly to small miners with a single machine, the mining range is limited to a threshold of 8 TB. When the size of archived data chunks exceeds 8 TB, a miner must specify a mining range over the data flow sequence in size of 8 TB. Large miners with enough machines to store all the data can mine on different data ranges concurrently.
 
-\subsubsection{Disincentivize Storage Outsourcing}
+\subsubsection{Disincentivizing Storage Outsourcing}
 
-To promote the whole network storing enough replicas of data chunks, \projabbrev Storage limits the reward share of a single miner with a single storage replica.
-%
-{\sproof} mechanism seals the data for each miner in different ways, challenges the accessing of sealed data, and prevents mining with data chunks from others. 
-% 
-If a miner outsources the data storage and queries the archived data chunks in {\sproof} mining, it must seal the answering data to compute the output digest, which is a large cost.
-%
-A miner can seal and unseal tens of MB data chunks by a single thread, so it can still serving the user queries efficiently. 
-%
-As reading data from SSDs can reach up to 7 GB/s, the data sealing is a heavy task for {\sproof} mining.
-%
-As long as the cost imposed by data sealing exceeds the cost of purchasing disks and synchronizing data, the miners intend to store a replica of data chunks instead of sealing data on {\sproof} mining.
+To promote the network storing enough replicas of data chunks, \projabbrev Storage limits the reward share of a single miner with a single storage replica. The {\sproof} mechanism seals the data for each miner in different ways, challenges the accessing of sealed data, and prevents mining with data chunks from others. If a miner outsources data storage and queries the archived data chunks in {\sproof} mining, it must seal the answering data to compute the output digest, which incurs a large cost. As reading data from SSDs can reach up to 7 GB/s, the data sealing is a heavy task for {\sproof} mining. As long as the cost imposed by data sealing exceeds the cost of purchasing disks and synchronizing data, miners will prefer to store a replica of data chunks instead of sealing data during {\sproof} mining.
 
-More specifically, every 4KB data chunk will sealed by the miner ID and other context data. 
-%
-Suppose {\sf seal\_seed} is a 32-byte digest of the miner ID and the context data, figure~\ref{fig:seal} defines the seal process.
-%
+Every 4KB data chunk will be sealed by the miner ID and other context data. Suppose {\sf seal\_seed} is a 32-byte digest of the miner ID and the context data. The seal process is defined in Algorithm~\ref{fig:seal}.
 
 \begin{algorithm}
 	\small
@@ -131,243 +65,47 @@ Suppose {\sf seal\_seed} is a 32-byte digest of the miner ID and the context dat
 	\vspace{-4mm}
 \end{algorithm}
 
-\subsubsection{Disincentivize Distributed Mining}
+\subsubsection{Disincentivizing Distributed Mining}
 
-As a mining mechanism for incentivizing data storage, a single storage replica should produce similar hashrate for fairness.
-%
-In {\sproof} mining process, the hashrate is bottlenecked by the storage I/O. 
-%
-So we expected all the miners has similar storage I/O per unit of storage. 
-%
-However, a mining farm can significantly increase its I/O compared to normal miners by storing data chunks with a distributed system with in-memory filesystem.
-%
-As the DDR memory has a significantly larger bandwidth compared to SSD, the mining farm can produce much more hashrate while contributing negligible to the data storage. 
+As a mining mechanism for incentivizing data storage, a single storage replica should produce similar hashrate for fairness. In {\sproof} mining, the hashrate is bottlenecked by the storage I/O. However, a mining farm can significantly increase its I/O compared to normal miners by storing data chunks with a distributed system with an in-memory filesystem. The mining farm can produce much more hashrate while contributing negligibly to data storage.
 
-\projabbrev Storage prevents this behavior by imposing a large amount of data transfer from the computing stage to the loading stage to encourage miners completing two stages on the same machine. 
-%
-So if the computing stage and loading stage are seperated different machines, the hashrate is bounded by the network bandwidth, which is usually smaller than the storage I/O bandwidth.
-%
-In the computing stage, a random scratchpad will be generated coupled with the recall position. 
-%
-It has the same length as the data chunk to be loaded. 
-%
-Before computing the hash of the loaded data chunk, the data chunk should be mixed with the scratchpad by an XOR operation.
+\projabbrev Storage prevents this behavior by imposing a large amount of data transfer from the computing stage to the loading stage to encourage miners to complete both stages on the same machine. If the computing and loading stages are separated on different machines, the hashrate is bounded by the network bandwidth, which is usually smaller than the storage I/O bandwidth. In the computing stage, a random scratchpad will be generated coupled with the recall position. It has the same length as the data chunk to be loaded. Before computing the hash of the loaded data chunk, the data chunk should be mixed with the scratchpad by an XOR operation.
 
+There is a dilemma between the read bandwidth and the transaction fee for submitting {\sproof} to the host chain. Loading data chunks from local disks should be more efficient than downloading them via the network. The loading stage should leverage the fast SSD read speeds in sequential access to maximize the data chunk loading bandwidth. Randomly loading 256-KB data chunks reaches 80% read speed of sequential access. However, submitting the data chunk to the host chain incurs high transaction fees. Reducing the size of the data chunk can mitigate this issue but will impair the read speed.
 
-However, there is a dilemma between the read bandwidth and the transaction fee for submitting {\sproof} to the host chain.
-%
-Since loading data chunk from local disks should be more efficient than downloading it via the network,
-%
-the loading stage should leverage the fast SSD read speeds in sequential access to maximize the data chunk loading bandwidth.
-%
-According to our benchmarks, randomly loading 256-KB data chunks reaches 80\% read speed of sequential access. 
-%
-However, when submitting the data chunk to the host chain, a 256-KB transaction is too large and will consume a large amount of transaction fee.
-%
-Reducing the size of data chunk can mitigate this issue, but will impair the read speed. 
-
-{\sproof} mechanism adopts ``batched data loading'' to resolve this dilemma. 
-%
-In each iteration, a miner loads 256-KB data chunk from storage, divides it into 4-KB data chunks, and computes the hash for each 4-KB data chunks individually. 
-%
-If one of the 64 outputs matches the target quality, the miner finds a valid answer.
-%
-So only the 4-KB data chunk contributing to this answer are required to submitted to the host chain. 
+{\sproof} mechanism adopts "batched data loading" to resolve this dilemma. In each iteration, a miner loads a 256-KB data chunk from storage, divides it into 4-KB data chunks, and computes the hash for each 4-KB data chunk individually. If one of the 64 outputs matches the target quality, the miner finds a valid answer. Only the 4-KB data chunk contributing to this answer is required to be submitted to the host chain.
 
 \subsubsection{Formal Definition for \sproof Mechanism}
 
-Precisely, the mining process has following steps:
+The mining process consists of the following steps:
 \begin{enumerate}
-	\item Register the $\sf miner\_id$ on the mining contract;
-	\item For each mining epoch, repeat the following steps:
+	\item Register the $\sf miner\_id$ on the mining contract.
+	\item For each mining epoch,
 	\begin{enumerate}
-		\item Wait for the layer-1 blockchain release a block at a given epoch height;
-		\item Get the block hash $\sf block\_hash$ of this block and the relevant context (including ${\sf merkle\_root, data\_length, context\_digest}$) at this time;
-		\item Compute the number of minable entries $n=\lfloor {\sf data\_length} / 256\text{KB} \rfloor$.
-		\item For each iteration, repeat the following steps:
+		\item Compute the starting mining status $\sf mining\_status$ using the block hash of the first block in this epoch.
+		\item Perform a loop to find valid \sproof in an epoch,
 		\begin{enumerate}
-			\item Pick a random 32-byte {\sf nonce};
-			\item Decide the mining range parameters {\sf start\_position} and {\sf mine\_length}; {\sf mine\_length} should be equal to $\min(8\text{TB},n\cdot 256\text{KB})$;
-			\item Compute the recall position $\tau$ and the scratchpad $\vec{s}$ by the algorithm in figure~\ref{fig:recall};
-			\item Load the 256-kilobyte sealed data chunk $\vec{d}$ started from the position of $h\cdot 256\text{KB}$;
-			\item Compute $\vec{w}=\vec{d}{\;\tt XOR\; }\vec{s}$ and divide $\vec{w}$ into 64 4-kilobyte pieces;
-			\item For each piece $\vec{v}$, compute the Blake2b hash of the tuple ({\sf miner\_id}, {\sf nonce}, {\sf context\_digest}, {\sf start\_position}, {\sf mine\_length}, $\vec{v}$); 
-			\item If one of Blake2b hash output is smaller than a target value, the miner finds a legitimate {\sproof} solution.
+			\item In the computing stage,
+			\begin{enumerate}
+				\item Sample a random $\sf nonce$.
+				\item Compute the recall position $\sf recall\_pos$ by hashing $\sf miner\_id$, $\sf nonce$, and $\sf mining\_status$.
+				\item Generate the scratchpad {\sf scratchpad} by hashing the recall position.
+			\end{enumerate}
+			\item In the loading stage,
+			\begin{enumerate}
+				\item Load 256-KB data chunks from $\sf recall\_pos$.
+				\item Divide the 256-KB data chunks into 64 4-KB chunks.
+				\item For each 4-KB chunk,
+				\begin{enumerate}
+					\item Seal the 4-KB data chunk with {\sf seal\_seed}.
+					\item Mix the 4-KB data chunk with the scratchpad by XORing.
+					\item Hash the mixed data chunk.
+					\item Check whether the hash output meets the target difficulty.
+				\end{enumerate}
+				\item If a 4-KB data chunk meets the target difficulty, submit the corresponding \sproof to the mining contract.
+			\end{enumerate}
 		\end{enumerate}
 	\end{enumerate}
 \end{enumerate}
 
-\begin{algorithm}
-	\small
-	\SetNlSty{}{}{}
-	\DontPrintSemicolon
-	\SetKw{To}{ to }
-	\SetKw{In}{ in }
-	\SetKw{Or}{ or }
-	\SetKw{And}{ and }
-	\SetKwInOut{Input}{Input}
-	\SetKwInOut{Output}{Output}
-	\SetKw{Define}{define}
-	\Input{{\sf miner\_id}, {\sf nonce}, {\sf context\_digest}, {\sf start\_position}, {\sf mine\_length}}
-	\Output{Recall position $\tau$ and the scratchpad $\vec{s}$}
-	$h\leftarrow \textrm{Blake2b}({\sf miner\_id}, {\sf nonce}, {\sf context\_digest}, {\sf start\_position}, {\sf mine\_length})$\;
-	Initialize an empty array $\vec{s}$ with 4096 64-byte elements\;
-	\For{$i\in \{x\in \mathbb{Z}\,|\,0\le x < 4095\}$}
-	{
-		$h\leftarrow \textrm{Blake2b}(h)$\;
-		$\vec{s}[i]\leftarrow h$\;
-	}
-	$r \leftarrow \textrm{Keccak256}(h)$\; 
-	$n\leftarrow {\sf mine\_length}/256\mathrm{KB}$\;
-	$\tau \leftarrow {\sf start\_position} + r \;\text{mod}\; n$
-	\caption{Computing the recall position and the scratchpad}
-	\label{fig:recall}
-	\vspace{-4mm}
-\end{algorithm}
-
-
-
-% More specifically, the \sproof challenges are produced in two steps:
-% first select candidate data entries based on mining status, miner's ID, and timestamp, where the probability of each data entry being selected is proportional to its size;
-% then based on the miner specified nonce, determine challenged data chunks from the candidate data entries.
-% Thus miners are slightly incentivized to maintain whole data entries rather than fragmented ones.
-
-% Every \sproof challenge contains $\querynum$ queries to randomly selected data chunks,
-% out of which at least $\ansnum$ queries must be answered.
-% This $\ansnum$-out-of-$\querynum$ design incentivizes smaller nodes who merely store a small fraction of the data by increasing the frequency that they receive mining rewards.
-% On the other hand, larger nodes who store a large fraction of the whole \project log tend to get greater reward each time by answering more than $\ansnum$ random queries (see \cref{subsec:mining reward} for details).
-% % 
-% For example, a node storing $10\%$ of total data is able to answer $10\%$ random queries in expectation, which means answering a single random query ($1$-out-of-$1$) with probability exactly $10\%$.
-% However, the probability that it manages to answer $2$-out-of-$10$ random queries turns out $1-0.9^{10}-10\times 0.1\times 0.9^9 \approx26.4\%$, while in expectation it still answers only $1$ query.
-
-% Given the \sproof challenge, the mining node then decides whether to respond to it.
-% If yes, the node should fill at least $\ansnum$ queried chunks into the proof, 
-% and the resulted proof is legitimate if its hash satisfies the target difficulty as recorded in the \project contract. 
-% Otherwise the node has to start over with a new \sproof challenge. 
-
-% In summary, the mining process has following steps:
-% \begin{enumerate}
-% 	\item Collect relevant metadata, including \emph{mining status}, \emph{target difficulty}, \emph{timestamp}, \etc.
-% 	\label{step:start}
-
-% 	\item Select candidate data entries by hashing on relevant metadata, \ie $\sproof_{entries}=\left( D_1, \dots, D_{\querynum} \right)=Hash\left(\textsf{mining\_status}, \textsf{timestamp}\right)$. 
-% 	If having less than $\ansnum$ data entries in its local storage, restart from step~\ref{step:start}.
-
-% 	\item Determine challenged data chunks based on a random \emph{nonce}, \ie $\sproof_{chunks}=\left( Q_1, \dots, Q_{\querynum} \right)=Hash\left(\sproof_{entries}, \textsf{nonce}\right)$.
-% 	\label{step:nonce}
-
-% 	\item Respond to the challenge with the content of at least $\ansnum$ queried chunks, together with a characteristic vector showing which queries are answered,
-% 	\ie $\sproof_{respond}=\left(\mathsf{v}, A_1, \dots, A_{\querynum} \right)$, where $\mathsf{v}\in\{0,1\}^{\querynum}$ is a $\querynum$-bit binary string with Hamming weight $|\mathsf{v}|\ge \ansnum$, and $A_i$ is the respond to query $Q_i$. 
-% 	More specifically, $A_i=\bot$ if the corresponding digit in $\mathsf{v}$ is $0$; and $A_i$ is the content of data chunk queried by $Q_i$ concatenated with the Merkle proof of $A_i$ with respect to the storage root of data entry $D_i$.
-% 	The full proof is then defined as $\textsf{mining\_proof}=\left(\textsf{mining\_status}, \textsf{timestamp}, \textsf{nonce}, \sproof_{respond}\right)$. 
-
-
-% 	\item Examine the full proof against difficulty criteria, \ie check whether $Hash\left( \textsf{mining\_proof} \right) \le \textsf{target\_difficulty}$.
-% 	If not satisfied, restart from step~\ref{step:nonce} with a new nonce, or from step~\ref{step:start} for new candidate  entries.
-
-% 	\item Package \textsf{mining\_proof} into a reward claiming transaction and submit to the \project contract on host chain.
-% \end{enumerate}
-
-
-\subsection{Mining Reward}
-\label{subsec:mining reward}
-
-\projabbrev Storage creates pricing segments every 8 GB of data chunks over the data flow. 
-%
-Each pricing segment is associated with an \emph{Endowment Pool} and a \emph{Reward Pool}. 
-%
-The \emph{Endowment Pool} collects the storage endowments of all the data chunks belongs to this pricing segment and releases a fixed ratio of balance to the \emph{Reward Pool} every second. 
-%
-The rate of reward release is set to 4\% per year. 
-
-
-The mining reward is paid to miners for providing data service.
-Miners receive mining reward when submit the first legitimate {\sproof} for a mining epoch to \projabbrev Storage contract.
-
-The mining reward consists of two parts:
-\begin{itemize}
-	\item {\bf Base reward}: the base reward, denoted by $R_{base}$, is paid for every accepted mining proof. The base reward per proof decreases over time.
-
-	\item {\bf Storage reward}:  the storage reward, denoted by $R_{storage}$, is the perpetual reward from storing data. 
-	%
-	When a {\sproof} falls in a pricing segment, half of the balance in its \emph{Reward Pool} are claimed as the storage reward. 
-
-\end{itemize}
-
-The total reward for a new mining proof is thus:
-\begin{align}
-	R_{total} = R_{base} + R_{storage}
-\end{align}
-
-
-\subsection{How to Balance the Number of Replicas?}
-
-Every miner in \projabbrev Storage is required to explicitly claim the range of data entries that he maintains, 
-and then he can only use the claimed data in his mining process.
-That is, a miner cannot get mining reward from unclaimed data, and on the other hand the mining output is decreased if he fails to answer a challenge within his claimed range.
-As a result, a miner has no incentive to lie about the range of data used for mining.
-
-Since miners truthfully expose the list of data entries that they maintain,
-it is easy to observe and estimate the number of replicas for every specific piece of data.
-Furthermore, recalling that the storage endowment is paid to miners who maintain corresponding piece of data,
-miners are incentivized to store rare data and hence balance the number of replicas.
-
-
-
-
-
-\subsection{How to Incentivize Data Sharing?}
-
-In a storage network, storing data can be easily incentivized by relating the mining reward to storage size, whereas sharing is much less incentivized since the communication of data has to happen outside consensus. 
-Therefore a rational node would prefer to share nothing in order to save bandwidth and power expenses.
-One may suggest that resorting to the mechanism similar to the BitTorrent network, where each node maintains a local ranking of its peers and refuses to share data with leechers.
-However such mechanism is far from optimal due to the mismatch between willingness and capability,
-especially in the scenario of a storage network: 
-a newcomer cannot quickly bootstrap since it has nothing to share, whereas a powerful node with sufficient data has much less incentive to increase its ranking score.
-
-\projabbrev Storage introduces a built-in royalty mechanism to incentivize data sharing behavior.
-The royalty mechanism allows a storage node to receive dividends 
-from the data it shared with others, 
-when a new mining proof is mined based on the shared data.
-Thus storage nodes have a clear incentive to share data with others, and newcomers get a better kick-start.
-
-The essence of royalty mechanism is that data providers are rewarded only after the data is actually shared.
-Data sharing is hard to incentivize mainly because offchain sharing behavior is not publicly observable.
-In particular, a third-party can hardly verify whether some node A sends specific data to another node B through an offchain channel,
-especially when both of the two nodes can be lying.
-However, the \project loyalty mechanism bypasses the problem by switching to another observable event, \ie a new mining proof is generated based on the shared data.
-If the data sharing did not happen, say the data provider ignored the request without sending data, then the requester would not be able to use that piece of data in its mining proof, and hence no reward for the unanswered data request.
-On the other hand, when the data is shared and by probability queried by the \sproof challenge, a rational miner will include it in the mining proof for a better payoff, which is positive even after deducting the dividends to the data provider.
-
-More specifically, the royalty mechanism works as follows:
-\begin{itemize}
- 	\item The data requester sends his request to the \projabbrev Storage contract to create a royalty record. Each royalty record includes the range of requested data entries, the designated data provider, and the length of royalty period.
- 	
- 	\item The data provider, when observing a new request on the host chain, decides on its own whether or not to send requested data to the requester.
-
- 	\item When the requester submits a mining proof $\pi$, the \project contract checks for every \sproof challenge query $Q_i$  in $\pi$ whether $Q_i$ falls in the range of some valid royalty record.
- 	If yes, the data provider gets a certain fraction of the storage reward as  dividend.
- 	% \begin{itemize}
- 	% 	\item If yes, then half of the corresponding storage reward $R_i$ as in \cref{eq:storage reward} will be assigned to the data provider, \ie each of the author of $\pi$ and the data provider gets $\frac{1}{2} R_i$.
-
- 	% 	\item Otherwise the author of $\pi$ gets full storage reward $R_i$ for query $Q_i$.
- 	% \end{itemize}
-
- 	\item Expired royalty records will be removed.
-\end{itemize}  
-
-As a result, data providers are incentivized for storing and sharing data,
-and the expected royalty dividends is proportional to the amount of shared data.
-There is no incentive to forge sharing relations since the total storage reward $R_i$ is unchanged with or without data sharing royalty.
-
-The expiration of royalty records is introduced for three reasons: a) in case a request is ignored, the requester can resubmit it to another data provider after the previous request expires;
-b) a permanent royalty record does not make sense in practice, since the requester can always open a new account and hence renders the record useless;
-c) cleaning expired royalty records reduces overhead of maintaining royalty sharing relations.
-
-Furthermore, the history of data sharing and royalty dividends can be observed onchain, which improves the effectiveness of credit ranking in the \projabbrev Storage network.
-
-
-% \section{Fairness and Counter-Cheating}
-
-
-
+The above steps ensure that the \sproof mechanism achieves the desired incentive for miners to store data and maintains fairness across different sizes of mining setups.
